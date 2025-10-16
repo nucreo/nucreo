@@ -13,8 +13,8 @@ export function Footer() {
               </div>
             </div>
             <div className="order-1 md:order-2 flex items-center justify-center">
-              <div className="relative inline-flex items-center justify-center rounded-lg border border-white/15 p-2">
-                <img src="/qr.png" alt="QR code" className="h-29 w-29 rounded" />
+              <div className="relative inline-flex items-center justify-center rounded-lg p-2">
+                <video src="/logo.mov" autoPlay loop muted playsInline className="h-29 w-29 rounded" />
               </div>
             </div>
             <div className="order-3 text-sm text-white/70">

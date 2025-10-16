@@ -11,6 +11,13 @@
    * tailwind.config.ts expects the following color variables to be expressed as HSL values.
    * A different format will require also updating the theme in tailwind.config.ts.
   */
+  
+  /* Prevent horizontal scrollbar from glowing spots extending beyond viewport */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  
   :root {
     /* Default to dark theme to match NUCREO style - Pure black background */
     --background: 0 0% 0%;
@@ -180,5 +187,127 @@
     background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, transparent 20%, transparent 80%, rgba(0, 0, 0, 1) 100%),
                 linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 20%, transparent 80%, rgba(0, 0, 0, 1) 100%);
     border-radius: inherit;
+  }
+  
+  /* Glowing spots effect - base styles */
+  .glow-container {
+    position: relative;
+    overflow: visible;
+  }
+
+  .glow-container::before,
+  .glow-container::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glowing spot variants */
+  .glow-bottom-left::before {
+    width: 600px;
+    height: 600px;
+    bottom: -300px;
+    left: -200px;
+    background: radial-gradient(circle, 
+      rgba(255, 140, 50, 0.4) 0%,
+      rgba(255, 100, 30, 0.25) 25%,
+      rgba(255, 80, 20, 0.1) 50%,
+      transparent 70%);
+    filter: blur(80px);
+  }
+
+  .glow-bottom-right::after {
+    width: 800px;
+    height: 700px;
+    bottom: -350px;
+    right: -350px;
+    background: radial-gradient(circle, 
+      rgba(255, 120, 40, 0.45) 0%,
+      rgba(255, 90, 25, 0.4) 30%,
+      rgba(255, 70, 15, 0.08) 55%,
+      transparent 75%);
+    filter: blur(90px);
+  }
+
+  .glow-top-left::before {
+    width: 800px;
+    height: 700px;
+    top: -250px;
+    left: -350px;
+    background: radial-gradient(circle, 
+      rgba(255, 130, 45, 0.4) 0%,
+      rgba(255, 95, 28, 0.58) 30%,
+      rgba(255, 75, 18, 0.07) 55%,
+      transparent 60%);
+    filter: blur(75px);
+  }
+
+  .glow-top-right::after {
+    width: 550px;
+    height: 550px;
+    top: -200px;
+    right: -180px;
+    background: radial-gradient(circle, 
+      rgba(255, 135, 48, 0.32) 0%,
+      rgba(255, 98, 30, 0.29) 28%,
+      rgba(255, 78, 20, 0.08) 52%,
+      transparent 72%);
+    filter: blur(85px);
+  }
+
+  .glow-center::before {
+    width: 800px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, 
+      rgba(255, 125, 42, 1) 0%,
+      rgba(255, 92, 26, 0.25) 30%,
+      rgba(255, 73, 17, 0.06) 55%,
+      transparent 75%);
+    filter: blur(100px);
+  }
+
+  .glow-center-bottom::after {
+    width: 900px;
+    height: 900px;
+    bottom: -450px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, 
+      rgba(255, 115, 38, 0.4) 0%,
+      rgba(255, 88, 24, 0.25) 28%,
+      rgba(255, 70, 16, 0.1) 50%,
+      transparent 70%);
+    filter: blur(95px);
+  }
+
+  .glow-multiple::before {
+    width: 600px;
+    height: 600px;
+    top: 20%;
+    left: 15%;
+    background: radial-gradient(circle, 
+      rgba(255, 128, 44, 0.28) 0%,
+      rgba(255, 94, 27, 0.26) 30%,
+      rgba(255, 74, 18, 0.06) 55%,
+      transparent 72%);
+    filter: blur(85px);
+  }
+
+  .glow-multiple::after {
+    width: 650px;
+    height: 650px;
+    bottom: 15%;
+    right: 20%;
+    background: radial-gradient(circle, 
+      rgba(255, 122, 41, 0.3) 0%,
+      rgba(255, 91, 25, 0.27) 32%,
+      rgba(255, 72, 17, 0.07) 57%,
+      transparent 74%);
+    filter: blur(88px);
   }
 }

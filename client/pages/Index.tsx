@@ -29,7 +29,7 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero */}
-      <section id="hero" className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
+      <section id="hero" className="glow-container glow-center relative min-h-[92vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/30 to-black" />
         <div className="container relative z-10 pt-24 pb-16 text-center">
           <p className="mt-10 text-white/70 text-lg">We’re</p>
@@ -45,8 +45,8 @@ export default function Index() {
       </section>
 
       {/* Expertise & Social Proof */}
-      <section id="expertise" className="py-20 md:py-28 scroll-mt-24">
-        <div className="container">
+      <section id="expertise" className="glow-container glow-top-left py-20 md:py-28 scroll-mt-24">
+        <div className="container relative z-10">
           <SectionTitle title="Designers with deep marketing experience" />
           <div className="grid gap-6 md:grid-cols-3">
             <div className="rounded-xl border border-white/10 bg-white/5 overflow-hidden">
@@ -63,23 +63,26 @@ export default function Index() {
       </section>
 
       {/* Services Offered */}
-      <section id="offer" className="py-20 md:py-28 scroll-mt-24">
-        <div className="container">
-          <p className="text-2xl md:text-4xl text-white/80">What we</p>
-          <h2 className="text-5xl md:text-7xl font-extrabold tracking-tight">OFFER</h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <section id="offer" className="glow-container glow-center py-20 md:py-28 scroll-mt-24">
+        <div className="container relative z-10">
+          <div className="text-center mb-12">
+            <p className="text-3xl md:text-5xl text-white/90 font-light">What we</p>
+            <h2 className="text-7xl md:text-9xl font-extrabold tracking-tight mt-2">OFFER</h2>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3 mt-16">
             {[
-              { id: "deepfakes", name: "DEEPFAKES", img: "/offer/deepfakes.png" },
-              { id: "gameplays", name: "GAMEPLAYS", img: "/offer/gameplay.png" },
-              { id: "actors", name: "ACTORS", img: "/offer/actors.png" },
-              { id: "ai-videos", name: "AI VIDEOS", img: "/offer/ai.png" },
-              { id: "smm", name: "SMM PROJECT MANAGEMENT", img: "/offer/smm.png" },
+              { id: "deepfakes", name: "DEEPFAKES" },
+              { id: "gameplays", name: "GAMEPLAYS" },
+              { id: "actors", name: "ACTORS" },
+              { id: "ai-videos", name: "AI VIDEOS" },
+              { id: "smm", name: "SMM PROJECT MANAGEMENT" },
             ].map((s) => (
-              <a key={s.id} href={`#${s.id}`} className="group rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition-colors">
-                <div className="h-24 rounded-lg overflow-hidden">
-                  <img src={s.img} alt={s.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="mt-4 font-semibold group-hover:gradient-text">{s.name}</div>
+              <a 
+                key={s.id} 
+                href={`#${s.id}`} 
+                className="inline-block px-8 py-3.5 text-base md:text-lg tracking-wide text-white  rounded-full hover:bg-white/20 transition-all"
+              >
+                {s.name}
               </a>
             ))}
           </div>
@@ -87,8 +90,8 @@ export default function Index() {
       </section>
 
       {/* Detailed Services */}
-      <section id="deepfakes" className="py-16 md:py-24 scroll-mt-24">
-        <div className="container grid gap-10 md:grid-cols-2 items-center">
+      <section id="deepfakes" className="glow-container glow-botttom-left py-16 md:py-24 scroll-mt-24">
+        <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Service</p>
             <h3 className="text-3xl md:text-5xl font-extrabold">DEEPFAKES</h3>
@@ -101,15 +104,15 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/14] w-full overflow-hidden rounded-xl image-fade-edges">
+            <div className="relative w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/deepfakes.png" alt="DEEPFAKES" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="gameplays" className="py-16 md:py-24 scroll-mt-24">
-        <div className="container grid gap-10 md:grid-cols-2 items-center">
+      <section id="gameplays" className="glow-container glow-top-right py-16 md:py-24 scroll-mt-24">
+        <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Service</p>
             <h3 className="text-3xl md:text-5xl font-extrabold">GAMEPLAYS</h3>
@@ -127,8 +130,8 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="actors" className="py-16 md:py-24 scroll-mt-24">
-        <div className="container grid gap-10 md:grid-cols-2 items-center">
+      <section id="actors" className="glow-container glow-bottom-right py-16 md:py-24 scroll-mt-24">
+        <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Service</p>
             <h3 className="text-3xl md:text-5xl font-extrabold">ACTORS</h3>
@@ -141,15 +144,15 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl image-fade-edges">
+            <div className="relative w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/actors.png" alt="ACTORS" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="ai-videos" className="py-16 md:py-24 scroll-mt-24">
-        <div className="container grid gap-10 md:grid-cols-2 items-center">
+      <section id="ai-videos" className="glow-container glow-top-left py-16 md:py-24 scroll-mt-24">
+        <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Service</p>
             <h3 className="text-3xl md:text-5xl font-extrabold">AI VIDEOS</h3>
@@ -162,15 +165,15 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl image-fade-edges">
+            <div className="relative w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/ai.png" alt="AI VIDEOS" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="smm" className="py-16 md:py-24 scroll-mt-24">
-        <div className="container grid gap-10 md:grid-cols-2 items-center">
+      <section id="smm" className="glow-container glow-bottom-left py-16 md:py-24 scroll-mt-24">
+        <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Service</p>
             <h3 className="text-3xl md:text-5xl font-extrabold">TURNKEY PROJECT MANAGEMENT</h3>
@@ -184,7 +187,7 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl image-fade-edges">
+            <div className="relative w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/smm.png" alt="SMM PROJECT MANAGEMENT" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -192,8 +195,8 @@ export default function Index() {
       </section>
 
       {/* Partnership Model */}
-      <section id="partnership" className="py-20 md:py-28 scroll-mt-24">
-        <div className="container">
+      <section id="partnership" className="glow-container glow-center py-20 md:py-28 scroll-mt-24">
+        <div className="container relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
               Partner with <span className="gradient-text">NUCREO</span>
@@ -208,8 +211,8 @@ export default function Index() {
       </section>
 
       {/* Our Process */}
-      <section id="workflow" className="py-20 md:py-28 scroll-mt-24">
-        <div className="container">
+      <section id="workflow" className="glow-container glow-multiple py-20 md:py-28 scroll-mt-24">
+        <div className="container relative z-10">
           <SectionTitle title="Our Workflow" />
           <div className="grid gap-x-12 gap-y-0 md:grid-cols-2">
             {/* Left Column */}
