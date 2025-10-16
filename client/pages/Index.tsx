@@ -29,7 +29,7 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero */}
-      <section id="hero" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <section id="hero" className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/30 to-black" />
         <div className="container relative z-10 pt-24 pb-16 text-center">
           <p className="mt-10 text-white/70 text-lg">We’re</p>
@@ -101,7 +101,7 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            <div className="relative aspect-[16/14] w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/deepfakes.png" alt="DEEPFAKES" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function Index() {
             </ul>
           </div>
           <div>
-            <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/gameplay.png" alt="GAMEPLAYS" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/actors.png" alt="ACTORS" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -162,7 +162,7 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/ai.png" alt="AI VIDEOS" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -173,8 +173,7 @@ export default function Index() {
         <div className="container grid gap-10 md:grid-cols-2 items-center">
           <div>
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">Service</p>
-            <h3 className="text-3xl md:text-5xl font-extrabold">SMM PROJECT MANAGEMENT</h3>
-            <p className="mt-2 text-sm text-white/60">TURNKEY PROJECT MANAGEMENT</p>
+            <h3 className="text-3xl md:text-5xl font-extrabold">TURNKEY PROJECT MANAGEMENT</h3>
             <ol className="mt-6 space-y-3 text-white/80 list-decimal list-inside">
               <li>Launching a project from scratch or joining an existing one</li>
               <li>Competitor analysis and creating a two-quarter development plan</li>
@@ -185,7 +184,7 @@ export default function Index() {
             </ol>
           </div>
           <div>
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl image-fade-edges">
               <img src="/offer/smm.png" alt="SMM PROJECT MANAGEMENT" className="w-full h-full object-cover" />
             </div>
           </div>
@@ -195,16 +194,15 @@ export default function Index() {
       {/* Partnership Model */}
       <section id="partnership" className="py-20 md:py-28 scroll-mt-24">
         <div className="container">
-          <SectionTitle title="Partner with Nucreo" />
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-              <h4 className="text-xl font-bold">Option 1</h4>
-              <p className="mt-2 text-white/80">Partner for one-off projects as a trusted outsource team.</p>
-            </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-              <h4 className="text-xl font-bold">Option 2</h4>
-              <p className="mt-2 text-white/80">Integrate fully as an in-house creative unit under NDA.</p>
-            </div>
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+              Partner with <span className="gradient-text">NUCREO</span>
+            </h2>
+            <p className="text-lg md:text-xl text-white/80 leading-relaxed">
+              for one-off projects as your trusted outsource team,<br />
+              or integrate us fully as your in-house creative<br />
+              unit under NDA.
+            </p>
           </div>
         </div>
       </section>
@@ -213,21 +211,135 @@ export default function Index() {
       <section id="workflow" className="py-20 md:py-28 scroll-mt-24">
         <div className="container">
           <SectionTitle title="Our Workflow" />
-          <div className="grid gap-6 md:grid-cols-2">
-            <ol className="space-y-3 list-decimal list-inside text-white/80">
-              <li>Brief consultation</li>
-              <li>Pre-payment — <span className="text-white">50% for new clients</span> and <span className="text-white">100% for returning</span></li>
-              <li>Research and Strategy</li>
-              <li>Concept & Script Creation</li>
-              <li>Content Production & Editing</li>
-              <li>Approval and Revisions</li>
-              <li>Final Payment</li>
-              <li>Paid revisions</li>
-              <li>Performance Review & Scaling</li>
-            </ol>
-            <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-              <h4 className="text-lg font-semibold gradient-text">Paid Revisions</h4>
-              <p className="mt-2 text-white/80">Extra work beyond the agreed scope is billed separately.</p>
+          <div className="grid gap-x-12 gap-y-0 md:grid-cols-2">
+            {/* Left Column */}
+            <div className="space-y-0">
+              {/* Brief consultation */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-[hsl(var(--brand-start))]">1</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Brief consultation</h4>
+                  <p className="mt-1 text-white/60">Discussing goals, target audience,<br />and key requirements.</p>
+                </div>
+              </div>
+
+              {/* Pre-payment */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-white">2</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Pre-payment</h4>
+                  <p className="mt-1 text-white/60">50% upfront for new clients.<br />100% upfront for returning clients.</p>
+                </div>
+              </div>
+
+              {/* General research and strategy development */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-[hsl(var(--brand-start))]">3</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">General research and strategy development</h4>
+                  <p className="mt-1 text-white/60">Analyze competitors, GEO<br />and market trends.</p>
+                </div>
+              </div>
+
+              {/* Concept & Script Creation */}
+              <div className="flex gap-4">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-[hsl(var(--brand-start))]">4</span>
+                  </div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Concept & Script Creation</h4>
+                  <p className="mt-1 text-white/60">Develop video scripts and source selection.<br />Client review and approval.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column */}
+            <div className="space-y-0">
+              {/* Content Production & Editing */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-[hsl(var(--brand-start))]">5</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Content Production & Editing</h4>
+                  <p className="mt-1 text-white/60">Script development and character/<br />style selection.</p>
+                </div>
+              </div>
+
+              {/* Approval and revisions */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-[hsl(var(--brand-start))]">6</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Approval and revisions</h4>
+                  <p className="mt-1 text-white/60">Adjustments to ensure the final result<br />meets your expectations.</p>
+                </div>
+              </div>
+
+              {/* Final Payment */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-white">7</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Final Payment</h4>
+                  <p className="mt-1 text-white/60">50% — remaining balance upon project<br />completion (for new clients only).</p>
+                </div>
+              </div>
+
+              {/* Paid Revisions */}
+              <div className="flex gap-4 pb-8">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-white">8</span>
+                  </div>
+                  <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Paid Revisions</h4>
+                  <p className="mt-1 text-white/60">Extra revisions billed separately.</p>
+                </div>
+              </div>
+
+              {/* Performance Review */}
+              <div className="flex gap-4">
+                <div className="flex flex-col items-center">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
+                    <span className="text-sm font-bold text-[hsl(var(--brand-start))]">9</span>
+                  </div>
+                </div>
+                <div className="flex-1 pt-1">
+                  <h4 className="text-xl font-bold text-white">Performance Review</h4>
+                  <p className="mt-1 text-white/60">Marketing metrics analysis and improvement identification.<br />Adapting content for other GEOs & offers<br />and scaling.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
