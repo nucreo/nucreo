@@ -11,13 +11,13 @@
    * tailwind.config.ts expects the following color variables to be expressed as HSL values.
    * A different format will require also updating the theme in tailwind.config.ts.
   */
-  
+
   /* Prevent horizontal scrollbar from glowing spots extending beyond viewport */
   html,
   body {
     overflow-x: hidden;
   }
-  
+
   :root {
     /* Default to dark theme to match NUCREO style - Pure black background */
     --background: 0 0% 0%;
@@ -69,6 +69,26 @@
     /* NUCREO brand gradient tokens (orange → red) to match presentation */
     --brand-start: 28 100% 55%;
     --brand-end: 0 100% 50%;
+
+    /* Glow Colors - Default (Orange/Red) */
+    --glow-primary: rgba(255, 125, 42, 1);
+    --glow-primary-alpha-45: rgba(255, 120, 40, 0.45);
+    --glow-primary-alpha-40: rgba(255, 140, 50, 0.4);
+    --glow-primary-alpha-32: rgba(255, 135, 48, 0.32);
+    --glow-primary-alpha-30: rgba(255, 122, 41, 0.3);
+    --glow-primary-alpha-28: rgba(255, 128, 44, 0.28);
+
+    --glow-secondary-alpha-58: rgba(255, 95, 28, 0.58);
+    --glow-secondary-alpha-40: rgba(255, 90, 25, 0.4);
+    --glow-secondary-alpha-29: rgba(255, 98, 30, 0.29);
+    --glow-secondary-alpha-27: rgba(255, 91, 25, 0.27);
+    --glow-secondary-alpha-26: rgba(255, 94, 27, 0.26);
+    --glow-secondary-alpha-25: rgba(255, 100, 30, 0.25);
+    
+    --glow-secondary-alpha-10: rgba(255, 80, 20, 0.1);
+    --glow-secondary-alpha-08: rgba(255, 78, 20, 0.08);
+    --glow-secondary-alpha-07: rgba(255, 72, 17, 0.07);
+    --glow-secondary-alpha-06: rgba(255, 74, 18, 0.06);
   }
 
   .light {
@@ -151,6 +171,37 @@
     --brand-start: 28 100% 55%;
     --brand-end: 0 100% 50%;
   }
+
+  [data-theme="tech"] {
+      /* Glow Colors - Tech (Blue/Purple #2D1ACA) */
+      /* Primary: #2D1ACA (rgb(45, 26, 202)) */
+      --glow-primary: rgba(45, 26, 202, 1);
+      --glow-primary-alpha-45: rgba(45, 26, 202, 0.45);
+      --glow-primary-alpha-40: rgba(60, 40, 220, 0.4);
+      --glow-primary-alpha-32: rgba(45, 26, 202, 0.32);
+      --glow-primary-alpha-30: rgba(45, 26, 202, 0.3);
+      --glow-primary-alpha-28: rgba(45, 26, 202, 0.28);
+
+      --glow-secondary-alpha-58: rgba(30, 10, 180, 0.58);
+      --glow-secondary-alpha-40: rgba(30, 10, 180, 0.4);
+      --glow-secondary-alpha-29: rgba(30, 10, 180, 0.29);
+      --glow-secondary-alpha-27: rgba(30, 10, 180, 0.27);
+      --glow-secondary-alpha-26: rgba(30, 10, 180, 0.26);
+      --glow-secondary-alpha-25: rgba(30, 10, 180, 0.25);
+
+      --glow-secondary-alpha-10: rgba(20, 5, 150, 0.1);
+      --glow-secondary-alpha-08: rgba(20, 5, 150, 0.08);
+      --glow-secondary-alpha-07: rgba(20, 5, 150, 0.07);
+      --glow-secondary-alpha-06: rgba(20, 5, 150, 0.06);
+
+      --brand-start: 247 77% 45%; /* Blueish for brand gradient if needed */
+      --brand-end: 260 80% 40%;
+  }
+
+  /* Ensure smooth transition for variables if supported, or rely on element transitions */
+  html, body {
+      transition: background-color 0.5s ease;
+  }
 }
 
 @layer base {
@@ -163,32 +214,72 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font-family:
+      "Inter",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      Segoe UI,
+      Roboto,
+      Helvetica,
+      Arial,
+      "Apple Color Emoji",
+      "Segoe UI Emoji";
   }
 }
 
 @layer utilities {
   .gradient-text {
-    background: linear-gradient(90deg, hsl(var(--brand-start)) 0%, hsl(var(--brand-end)) 100%);
+    background: linear-gradient(
+      90deg,
+      hsl(var(--brand-start)) 0%,
+      hsl(var(--brand-end)) 100%
+    );
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
   .nucreo-glow {
-    background: radial-gradient(60% 60% at 50% 100%, hsla(var(--brand-start),0.25), transparent 60%),
-                radial-gradient(40% 30% at 5% 0%, hsla(var(--brand-end),0.2), transparent 60%),
-                radial-gradient(30% 30% at 100% 10%, hsla(var(--brand-start),0.18), transparent 60%);
+    background:
+      radial-gradient(
+        60% 60% at 50% 100%,
+        hsla(var(--brand-start), 0.25),
+        transparent 60%
+      ),
+      radial-gradient(
+        40% 30% at 5% 0%,
+        hsla(var(--brand-end), 0.2),
+        transparent 60%
+      ),
+      radial-gradient(
+        30% 30% at 100% 10%,
+        hsla(var(--brand-start), 0.18),
+        transparent 60%
+      );
   }
   .image-fade-edges::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, transparent 20%, transparent 80%, rgba(0, 0, 0, 1) 100%),
-                linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, transparent 20%, transparent 80%, rgba(0, 0, 0, 1) 100%);
+    background:
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1) 0%,
+        transparent 20%,
+        transparent 80%,
+        rgba(0, 0, 0, 1) 100%
+      ),
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 1) 0%,
+        transparent 20%,
+        transparent 80%,
+        rgba(0, 0, 0, 1) 100%
+      );
     border-radius: inherit;
   }
-  
+
   /* Glowing spots effect - base styles */
   .glow-container {
     position: relative;
@@ -197,11 +288,12 @@
 
   .glow-container::before,
   .glow-container::after {
-    content: '';
+    content: "";
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
+    transition: background 0.5s ease-in-out;
   }
 
   /* Glowing spot variants */
@@ -210,11 +302,13 @@
     height: 600px;
     bottom: -300px;
     left: -200px;
-    background: radial-gradient(circle, 
-      rgba(255, 140, 50, 0.4) 0%,
-      rgba(255, 100, 30, 0.25) 25%,
-      rgba(255, 80, 20, 0.1) 50%,
-      transparent 70%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-40) 0%,
+      var(--glow-secondary-alpha-25) 25%,
+      var(--glow-secondary-alpha-10) 50%,
+      transparent 70%
+    );
     filter: blur(80px);
   }
 
@@ -223,11 +317,13 @@
     height: 700px;
     bottom: -350px;
     right: -350px;
-    background: radial-gradient(circle, 
-      rgba(255, 120, 40, 0.45) 0%,
-      rgba(255, 90, 25, 0.4) 30%,
-      rgba(255, 70, 15, 0.08) 55%,
-      transparent 75%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-45) 0%,
+      var(--glow-secondary-alpha-40) 30%,
+      var(--glow-secondary-alpha-08) 55%,
+      transparent 75%
+    );
     filter: blur(90px);
   }
 
@@ -236,11 +332,13 @@
     height: 700px;
     top: -250px;
     left: -350px;
-    background: radial-gradient(circle, 
-      rgba(255, 130, 45, 0.4) 0%,
-      rgba(255, 95, 28, 0.58) 30%,
-      rgba(255, 75, 18, 0.07) 55%,
-      transparent 60%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-40) 0%,
+      var(--glow-secondary-alpha-58) 30%,
+      var(--glow-secondary-alpha-07) 55%,
+      transparent 60%
+    );
     filter: blur(75px);
   }
 
@@ -249,11 +347,13 @@
     height: 550px;
     top: -200px;
     right: -180px;
-    background: radial-gradient(circle, 
-      rgba(255, 135, 48, 0.32) 0%,
-      rgba(255, 98, 30, 0.29) 28%,
-      rgba(255, 78, 20, 0.08) 52%,
-      transparent 72%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-32) 0%,
+      var(--glow-secondary-alpha-29) 28%,
+      var(--glow-secondary-alpha-08) 52%,
+      transparent 72%
+    );
     filter: blur(85px);
   }
 
@@ -263,11 +363,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: radial-gradient(circle, 
-      rgba(255, 125, 42, 1) 0%,
-      rgba(255, 92, 26, 0.25) 30%,
-      rgba(255, 73, 17, 0.06) 55%,
-      transparent 75%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary) 0%,
+      var(--glow-secondary-alpha-25) 30%,
+      var(--glow-secondary-alpha-06) 55%,
+      transparent 75%
+    );
     filter: blur(100px);
   }
 
@@ -277,11 +379,13 @@
     bottom: -450px;
     left: 50%;
     transform: translateX(-50%);
-    background: radial-gradient(circle, 
-      rgba(255, 115, 38, 0.4) 0%,
-      rgba(255, 88, 24, 0.25) 28%,
-      rgba(255, 70, 16, 0.1) 50%,
-      transparent 70%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-40) 0%,
+      var(--glow-secondary-alpha-25) 28%,
+      var(--glow-secondary-alpha-10) 50%,
+      transparent 70%
+    );
     filter: blur(95px);
   }
 
@@ -290,11 +394,13 @@
     height: 600px;
     top: 20%;
     left: 15%;
-    background: radial-gradient(circle, 
-      rgba(255, 128, 44, 0.28) 0%,
-      rgba(255, 94, 27, 0.26) 30%,
-      rgba(255, 74, 18, 0.06) 55%,
-      transparent 72%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-28) 0%,
+      var(--glow-secondary-alpha-26) 30%,
+      var(--glow-secondary-alpha-06) 55%,
+      transparent 72%
+    );
     filter: blur(85px);
   }
 
@@ -303,11 +409,71 @@
     height: 650px;
     bottom: 15%;
     right: 20%;
-    background: radial-gradient(circle, 
-      rgba(255, 122, 41, 0.3) 0%,
-      rgba(255, 91, 25, 0.27) 32%,
-      rgba(255, 72, 17, 0.07) 57%,
-      transparent 74%);
+    background: radial-gradient(
+      circle,
+      var(--glow-primary-alpha-30) 0%,
+      var(--glow-secondary-alpha-27) 32%,
+      var(--glow-secondary-alpha-07) 57%,
+      transparent 74%
+    );
     filter: blur(88px);
+  }
+}
+
+/* Horizontal Page Slider Styles */
+@layer components {
+  .page-slider-viewport {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-slider-track {
+    display: flex;
+    width: fit-content;
+  }
+
+  .page-slider-page {
+    width: 100vw;
+    min-height: 100vh;
+    flex-shrink: 0;
+    overflow: visible;
+  }
+
+  /* Page indicator dots */
+  .page-slider-dots {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 100;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .page-slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .page-slider-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .page-slider-dot.active {
+    background: hsl(var(--brand-start));
+    box-shadow: 0 0 8px hsl(var(--brand-start));
+    transform: scale(1.2);
   }
 }

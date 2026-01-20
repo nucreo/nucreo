@@ -1,6 +1,7 @@
 import Layout from "@/components/nucreo/Layout";
 import { Footer } from "@/components/nucreo/Footer";
 import { ScrollToTopButton } from "@/components/nucreo/ScrollToTopButton";
+import { usePageSlider } from "@/contexts/PageSliderContext";
 
 function SectionTitle({ kicker, title }: { kicker?: string; title: string }) {
   return (
@@ -26,19 +27,30 @@ function Pill({ children }: { children: React.ReactNode }) {
 }
 
 export default function Index() {
+  const { goToTech } = usePageSlider();
+
   return (
     <Layout>
       {/* Hero */}
       <section id="hero" className="glow-container glow-center relative min-h-[92vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/30 to-black" />
         <div className="container relative z-10 pt-24 pb-16 text-center">
-          <p className="mt-10 text-white/70 text-lg">We’re</p>
+          <p className="mt-10 text-white/70 text-lg">We're</p>
           <h1 className="mt-2 text-5xl md:text-7xl lg:text-8xl font-extrabold leading-[0.95]">
-            “NUCREO”
+            "NUCREO"
           </h1>
           <p className="mt-4 text-xl md:text-2xl text-white/80">Creative design agency</p>
-          <div className="mt-10 flex items-center justify-center gap-3">
+          <div className="mt-10 flex items-center justify-center gap-3 flex-wrap">
             <a href="#offer" className="inline-flex items-center rounded-md bg-gradient-to-tr from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))] px-5 py-3 font-semibold text-black shadow-lg shadow-orange-500/20">Explore services</a>
+            <button
+              onClick={goToTech}
+              className="inline-flex items-center rounded-md border border-[hsl(var(--brand-start))]/50 bg-[hsl(var(--brand-start))]/10 px-5 py-3 font-semibold text-[hsl(var(--brand-start))] hover:bg-[hsl(var(--brand-start))]/20 transition-colors"
+            >
+              Explore Tech
+              <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
             <a href="#contact" className="inline-flex items-center rounded-md border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white/90 hover:bg-white/10">Contact</a>
           </div>
         </div>
@@ -77,9 +89,9 @@ export default function Index() {
               { id: "ai-videos", name: "AI VIDEOS" },
               { id: "smm", name: "SMM PROJECT MANAGEMENT" },
             ].map((s) => (
-              <a 
-                key={s.id} 
-                href={`#${s.id}`} 
+              <a
+                key={s.id}
+                href={`#${s.id}`}
                 className="inline-block px-8 py-3.5 text-base md:text-lg tracking-wide text-white  rounded-full hover:bg-white/20 transition-all"
               >
                 {s.name}
