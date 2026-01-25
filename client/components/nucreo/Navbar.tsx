@@ -37,16 +37,19 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-black/60 border-b border-white/5">
       <nav className="container flex items-center justify-between h-14">
         {/* Animated Logo */}
-        <motion.a
-          href={logoHref}
-          className="text-xl font-extrabold tracking-wide gradient-text"
-          key={logoText}
-          initial={false}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-        >
-          {logoText}
-        </motion.a>
+        <AnimatePresence mode="wait">
+          <motion.a
+            href={logoHref}
+            className="text-xl font-extrabold tracking-wide gradient-text"
+            key={logoText}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {logoText}
+          </motion.a>
+        </AnimatePresence>
 
         {/* Animated Desktop Links */}
         <AnimatePresence mode="wait">

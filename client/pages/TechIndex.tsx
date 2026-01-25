@@ -48,9 +48,12 @@ function TechFooter() {
             </div>
             <div className="order-1 md:order-2 flex items-center justify-center">
               <div className="relative inline-flex items-center justify-center rounded-lg p-2">
-                <img
-                  src="/qr_code.png"
-                  alt="Qr"
+                <video
+                  src="/logo.mov"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   className="h-29 w-29 rounded"
                 />
               </div>
@@ -494,7 +497,7 @@ export default function TechIndex() {
           <img
             src="/python_image.png"
             alt="Python"
-            className="absolute right-0 top-1/4 mb:top-1/3  -translate-y-1/2 z-20 w-1/6 md:w-1/7 pointer-events-none"
+            className="absolute right-0 top-1/4 md:top-1/3 -translate-y-1/2 z-20 w-[22%] md:w-[10%] pointer-events-none"
           />
 
           {/* Telegram Image - positioned absolutely, centered, behind cards */}

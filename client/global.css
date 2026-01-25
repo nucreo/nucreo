@@ -439,6 +439,11 @@
     position: relative;
   }
 
+  .page-slider-page.page-inactive {
+    max-height: 100vh;
+    overflow: hidden;
+  }
+
   /* Page indicator dots */
   .page-slider-dots {
     position: fixed;

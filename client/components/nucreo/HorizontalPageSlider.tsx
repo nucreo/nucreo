@@ -96,7 +96,7 @@ export function HorizontalPageSlider({ children }: HorizontalPageSliderProps) {
         {children.map((child, index) => (
           <div
             key={index}
-            className="page-slider-page"
+            className={`page-slider-page ${index !== currentPage ? 'page-inactive' : ''}`}
             ref={el => pageRefs.current[index] = el}
           >
             {child}
