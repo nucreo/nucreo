@@ -10,6 +10,7 @@ pnpm build      # Production build (client + server)
 pnpm start      # Run production server
 pnpm typecheck  # TypeScript validation
 pnpm test       # Run Vitest tests
+pnpm test <file> # Run single test file (e.g., pnpm test utils.spec)
 pnpm format.fix # Format code with Prettier
 ```
 
@@ -20,9 +21,10 @@ This is a full-stack React SPA with an optional Express backend, using Vite for 
 ### Project Structure
 
 - `client/` - React SPA frontend
-  - `pages/` - Route components (Index.tsx = home)
-  - `components/ui/` - shadcn/ui component library (49 components)
-  - `components/nucreo/` - Application-specific components
+  - `pages/` - Route components (Index.tsx = home, TechIndex.tsx = tech landing)
+  - `components/ui/` - shadcn/ui component library
+  - `components/nucreo/` - Application-specific components (Layout, Navbar, Footer, HorizontalPageSlider)
+  - `contexts/` - React contexts (PageSliderContext for horizontal navigation)
   - `App.tsx` - Entry point with routing setup
   - `global.css` - TailwindCSS theming (CSS variables)
 - `server/` - Express API backend (create routes only when necessary)
@@ -36,6 +38,8 @@ This is a full-stack React SPA with an optional Express backend, using Vite for 
 ### Key Patterns
 
 **Routing**: React Router 6 in `client/App.tsx`. Add new routes above the catch-all `*` route.
+
+**Page Slider**: Horizontal page navigation using `PageSliderContext` and `HorizontalPageSlider`. Use `usePageSlider()` hook with `goToMain()`, `goToTech()`, or `goToPage(index)` to navigate between pages.
 
 **Styling**: TailwindCSS 3 with CSS variable-based theming. Use the `cn()` utility from `@/lib/utils` for conditional classes.
 

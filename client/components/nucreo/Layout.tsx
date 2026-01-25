@@ -4,14 +4,14 @@ import { usePageSlider } from "@/contexts/PageSliderContext";
 
 export default function Layout({ children }: PropsWithChildren) {
   const { currentPage } = usePageSlider();
-  // Page 1 is TechIndex, so use 'tech' theme, otherwise 'default'
-  const theme = currentPage === 1 ? "tech" : "default";
+  const isTech = currentPage === 1;
 
   return (
-    <div className="min-h-screen bg-background text-foreground" data-theme={theme}>
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
       <main className="relative">
-        <div aria-hidden className="pointer-events-none fixed inset-0 nucreo-glow" />
+        <div aria-hidden className="pointer-events-none fixed inset-0 nucreo-glow transition-opacity duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" style={{ opacity: isTech ? 0 : 1 }} />
+        <div aria-hidden className="pointer-events-none fixed inset-0 nucreo-glow theme-tech transition-opacity duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]" style={{ opacity: isTech ? 1 : 0 }} />
         {children}
       </main>
     </div>
