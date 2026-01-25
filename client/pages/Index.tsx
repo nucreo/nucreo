@@ -40,7 +40,7 @@ export default function Index() {
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/30 to-black" />
 
         {/* Top Labels - between title and top of screen */}
-        <div className="absolute top-[30%] left-[25%] -translate-x-1/2 z-20">
+        <div className="absolute top-[28%] left-[25%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange">gambling</BracketLabel>
         </div>
         <div className="absolute top-[30%] left-[75%] -translate-x-1/2 z-20">
@@ -107,7 +107,7 @@ export default function Index() {
         <div className="absolute top-[70%] left-[35%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange">crypto</BracketLabel>
         </div>
-        <div className="absolute top-[70%] ml-2 left-[65%] -translate-x-1/2 z-20">
+        <div className="absolute top-[72%] ml-2 left-[65%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange">dating</BracketLabel>
         </div>
       </section>

@@ -17,8 +17,8 @@ export function ScrollToTopButton() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       className={cn(
         "fixed bottom-6 right-6 h-11 w-11 rounded-full z-50",
-        "bg-gradient-to-tr from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]",
-        "text-black shadow-lg shadow-orange-500/20 transition-all",
+        "bg-gradient-to-tr from-[#FF5E00] to-[#AD0000]",
+        "text-white shadow-lg shadow-orange-500/20 transition-all",
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
       )}
     >
