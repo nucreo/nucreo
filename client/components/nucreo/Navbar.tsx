@@ -36,71 +36,76 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-black/60 border-b border-white/5">
       <nav className="container flex items-center justify-between h-14">
-        {/* Animated Logo */}
-        <AnimatePresence mode="wait">
-          <motion.a
-            href={logoHref}
-            className="text-xl font-extrabold tracking-wide gradient-text"
-            key={logoText}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          >
-            {logoText}
-          </motion.a>
-        </AnimatePresence>
+        {/* Logo - uses absolute positioning within relative container */}
+        <div className="relative h-full flex items-center">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.a
+              href={logoHref}
+              className="text-xl font-extrabold tracking-wide gradient-text whitespace-nowrap"
+              key={logoText}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {logoText}
+            </motion.a>
+          </AnimatePresence>
+        </div>
 
-        {/* Animated Desktop Links */}
-        <AnimatePresence mode="wait">
-          <motion.ul
-            key={isTech ? 'tech' : 'main'}
-            className="hidden md:flex gap-6 text-sm text-white/70"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          >
-            {links.map((l, index) => (
-              <motion.li
-                key={l.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{
-                  duration: 0.3,
-                  delay: index * 0.03,
-                  ease: [0.4, 0, 0.2, 1]
-                }}
-              >
-                <a
-                  className={cn(
-                    "hover:text-white transition-colors",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-end))] rounded"
-                  )}
-                  href={l.href}
+        {/* Desktop Links - fixed to the right with absolute positioning */}
+        <div className="relative hidden md:flex items-center h-full">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.ul
+              key={isTech ? 'tech' : 'main'}
+              className="flex gap-6 text-sm text-white/70"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {links.map((l, index) => (
+                <motion.li
+                  key={l.href}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 0.2,
+                    delay: index * 0.02,
+                    ease: [0.4, 0, 0.2, 1]
+                  }}
                 >
-                  {l.label}
-                </a>
-              </motion.li>
-            ))}
-          </motion.ul>
-        </AnimatePresence>
+                  <a
+                    className={cn(
+                      "hover:text-white transition-colors whitespace-nowrap",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-end))] rounded"
+                    )}
+                    href={l.href}
+                  >
+                    {l.label}
+                  </a>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </AnimatePresence>
+        </div>
 
-        {/* Animated Mobile Contact */}
-        <AnimatePresence mode="wait">
-          <motion.a
-            key={mobileContactHref}
-            href={mobileContactHref}
-            className="md:hidden text-sm text-white/70 hover:text-white"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-          >
-            Contact
-          </motion.a>
-        </AnimatePresence>
+        {/* Mobile Contact */}
+        <div className="relative md:hidden flex items-center h-full">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.a
+              key={mobileContactHref}
+              href={mobileContactHref}
+              className="text-sm text-white/70 hover:text-white whitespace-nowrap"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+            >
+              Contact
+            </motion.a>
+          </AnimatePresence>
+        </div>
       </nav>
     </header>
   );

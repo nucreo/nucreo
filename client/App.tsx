@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PageSliderProvider } from "@/contexts/PageSliderContext";
 import { HorizontalPageSlider } from "@/components/nucreo/HorizontalPageSlider";
+import { Navbar } from "@/components/nucreo/Navbar";
+import { PageGlow } from "@/components/nucreo/PageGlow";
 import Index from "./pages/Index";
 import TechIndex from "./pages/TechIndex";
 import NotFound from "./pages/NotFound";
@@ -17,6 +19,9 @@ const queryClient = new QueryClient();
 function HomePage() {
   return (
     <PageSliderProvider>
+      {/* Navbar rendered OUTSIDE the slider to prevent transform breaking fixed positioning */}
+      <Navbar />
+      <PageGlow />
       <HorizontalPageSlider>
         <Index />
         <TechIndex />

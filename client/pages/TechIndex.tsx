@@ -1,5 +1,4 @@
 import Layout from "@/components/nucreo/Layout";
-import { Footer } from "@/components/nucreo/Footer";
 import { ScrollToTopButton } from "@/components/nucreo/ScrollToTopButton";
 import { usePageSlider } from "@/contexts/PageSliderContext";
 import { BracketLabel } from "@/components/nucreo/BracketLabel";
@@ -169,7 +168,7 @@ export default function TechIndex() {
           <div className="absolute top-[75%] left-[35%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange">typescript</BracketLabel>
           </div>
-          <div className="absolute top-[77%] ml-3 left-[65%] -translate-x-1/2 z-20">
+          <div className="absolute top-[77%] ml-5 left-[65%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange">node.js</BracketLabel>
           </div>
 
