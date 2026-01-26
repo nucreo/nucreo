@@ -17,6 +17,7 @@ interface AnimatedSectionProps {
   delay?: number;
   className?: string;
   as?: "div" | "section" | "article" | "aside";
+  id?: string;
 }
 
 /**
@@ -94,13 +95,15 @@ export function AnimatedSection({
   direction = "up",
   delay = 0,
   className,
-  as = "div"
+  as = "div",
+  id
 }: AnimatedSectionProps) {
   const MotionComponent = motion[as];
   const variants = getVariants(direction, delay);
 
   return (
     <MotionComponent
+      id={id}
       className={cn(className)}
       initial="hidden"
       whileInView="visible"

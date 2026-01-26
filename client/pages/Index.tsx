@@ -172,12 +172,12 @@ export default function Index() {
         </div>
 
         {/* Bottom Labels - under title with good margin */}
-        <div className="absolute top-[70%] left-[35%] -translate-x-1/2 z-20">
+        <div className="absolute top-[74%] left-[35%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.8} floatDuration={3.2}>
             crypto
           </BracketLabel>
         </div>
-        <div className="absolute top-[72%] ml-2 left-[65%] -translate-x-1/2 z-20">
+        <div className="absolute top-[76%] ml-2 left-[65%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.9} floatDuration={3.8}>
             dating
           </BracketLabel>
@@ -187,7 +187,7 @@ export default function Index() {
       {/* Expertise & Social Proof */}
       <section
         id="expertise"
-        className="glow-container glow-top-left py-20 md:py-28 scroll-mt-24"
+        className="glow-container glow-top-left py-20 md:py-28 "
       >
         <div className="container relative z-10">
           <SectionTitle title="Designers with deep marketing experience" />
@@ -223,7 +223,7 @@ export default function Index() {
       {/* Services Offered */}
       <section
         id="offer"
-        className="glow-container glow-center py-20 md:py-28 scroll-mt-24"
+        className="glow-container glow-center py-20 md:py-28 "
       >
         <div className="container relative z-10">
           <AnimatedSection direction="up" className="flex justify-center mb-12">
@@ -267,11 +267,10 @@ export default function Index() {
 
       {/* Detailed Services */}
       <section
-        id="deepfakes"
-        className="glow-container glow-botttom-left py-16 md:py-24 scroll-mt-24"
+        className="glow-container glow-botttom-left py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-          <AnimatedSection direction="left">
+          <AnimatedSection direction="left" id="deepfakes" className="">
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">
               Service
             </p>
@@ -309,11 +308,10 @@ export default function Index() {
       </section>
 
       <section
-        id="gameplays"
-        className="glow-container glow-bottom-left py-16 md:py-24 scroll-mt-24"
+        className="glow-container glow-bottom-left py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-          <AnimatedSection direction="left">
+          <AnimatedSection direction="left" id="gameplays" className="">
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">
               Service
             </p>
@@ -331,11 +329,11 @@ export default function Index() {
             </AnimatedList>
           </AnimatedSection>
           <AnimatedSection direction="right" delay={0.2}>
-            <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl image-fade-edges">
+            <div className="relative w-full max-h-[calc(100vh-30px)] rounded-xl image-fade-edges">
               <ParallaxImage
                 src="/Gameplay Phone.mp4"
                 alt="GAMEPLAYS"
-                className="w-full h-full object-cover"
+                className="w-full max-h-[calc(100vh-30px)] object-contain rounded-xl"
                 isVideo
               />
             </div>
@@ -344,11 +342,10 @@ export default function Index() {
       </section>
 
       <section
-        id="actors"
-        className="glow-container py-16 md:py-24 scroll-mt-24"
+        className="glow-container py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-          <AnimatedSection direction="left">
+          <AnimatedSection direction="left" id="actors" className="">
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">
               Service
             </p>
@@ -381,9 +378,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="ai-videos" className="py-16 md:py-24 scroll-mt-24">
+      <section className="py-16 md:py-24">
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-          <AnimatedSection direction="left" className="glow-container glow-bottom-left">
+          <AnimatedSection direction="left" id="ai-videos" className="glow-container glow-bottom-left ">
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">
               Service
             </p>
@@ -399,9 +396,10 @@ export default function Index() {
           <AnimatedSection direction="right" delay={0.2}>
             <div className="relative w-full overflow-hidden rounded-xl image-fade-edges">
               <ParallaxImage
-                src="/offer/ai.png"
+                src="/RedBull_Mac.mp4"
                 alt="AI VIDEOS"
                 className="w-full h-full object-cover"
+                isVideo
               />
             </div>
           </AnimatedSection>
@@ -409,11 +407,10 @@ export default function Index() {
       </section>
 
       <section
-        id="smm"
-        className="glow-container glow-bottom-left py-16 md:py-24 scroll-mt-24"
+        className="glow-container glow-bottom-left py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-          <AnimatedSection direction="left">
+          <AnimatedSection direction="left" id="smm" className="">
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">
               Service
             </p>
@@ -450,7 +447,7 @@ export default function Index() {
       {/* Partnership Model */}
       <section
         id="partnership"
-        className="glow-container glow-center py-20 md:py-28 scroll-mt-24"
+        className="glow-container glow-center py-20 md:py-28 "
       >
         <div className="container relative z-10">
           <AnimatedSection direction="up" className="text-center max-w-4xl mx-auto">
@@ -471,7 +468,7 @@ export default function Index() {
       {/* Our Process */}
       <section
         id="workflow"
-        className="glow-container glow-multiple py-20 md:py-28 scroll-mt-24"
+        className="glow-container glow-multiple py-20 md:py-28 "
       >
         <div className="container relative z-10">
           <SectionTitle title="Our Workflow" />

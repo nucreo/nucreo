@@ -2,6 +2,21 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePageSlider } from "@/contexts/PageSliderContext";
 
+/**
+ * Scroll to element with center alignment
+ */
+function scrollToCenter(e: React.MouseEvent<HTMLAnchorElement>, href: string) {
+  e.preventDefault();
+  const id = href.replace("#", "");
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+}
+
 const mainLinks = [
   { href: "#expertise", label: "Expertise" },
   { href: "#offer", label: "Offer" },
@@ -41,7 +56,8 @@ export function Navbar() {
           <AnimatePresence mode="wait" initial={false}>
             <motion.a
               href={logoHref}
-              className="text-xl font-extrabold tracking-wide gradient-text whitespace-nowrap"
+              onClick={(e) => scrollToCenter(e, logoHref)}
+              className="text-xl font-extrabold tracking-wide gradient-text whitespace-nowrap cursor-pointer"
               key={logoText}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,10 +93,11 @@ export function Navbar() {
                 >
                   <a
                     className={cn(
-                      "hover:text-white transition-colors whitespace-nowrap",
+                      "hover:text-white transition-colors whitespace-nowrap cursor-pointer",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--brand-end))] rounded"
                     )}
                     href={l.href}
+                    onClick={(e) => scrollToCenter(e, l.href)}
                   >
                     {l.label}
                   </a>
@@ -96,7 +113,8 @@ export function Navbar() {
             <motion.a
               key={mobileContactHref}
               href={mobileContactHref}
-              className="text-sm text-white/70 hover:text-white whitespace-nowrap"
+              onClick={(e) => scrollToCenter(e, mobileContactHref)}
+              className="text-sm text-white/70 hover:text-white whitespace-nowrap cursor-pointer"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
