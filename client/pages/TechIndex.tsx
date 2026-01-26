@@ -1,34 +1,146 @@
+import { useRef } from "react";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import Layout from "@/components/nucreo/Layout";
 import { ScrollToTopButton } from "@/components/nucreo/ScrollToTopButton";
 import { usePageSlider } from "@/contexts/PageSliderContext";
 import { BracketLabel } from "@/components/nucreo/BracketLabel";
+import { SectionTitle } from "@/components/nucreo/SectionTitle";
+import { AnimatedSection } from "@/components/nucreo/AnimatedSection";
+import { AnimatedTextLine } from "@/components/nucreo/AnimatedText";
+import { TimelineColumn, TimelineStepSimple } from "@/components/nucreo/TimelineStep";
+import {
+  heroStaggerContainer,
+  heroStaggerItem,
+  staggerContainer,
+  staggerItem,
+  defaultViewport,
+  buttonHover,
+  buttonTap,
+  primaryButtonHoverTech,
+  TIMING,
+  EASING,
+  parallaxConfig
+} from "@/lib/animations";
 
-function SectionTitle({ kicker, title }: { kicker?: string; title: string }) {
+/**
+ * ParallaxImage - Image wrapper with parallax scroll effect
+ */
+function ParallaxImage({
+  src,
+  alt,
+  className
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: parallaxConfig.offset
+  });
+  const y = useTransform(scrollYProgress, [0, 1], parallaxConfig.rangeSubtle);
+
   return (
-    <div className="mb-10">
-      {kicker && (
-        <p className="text-sm uppercase tracking-[0.2em] text-white/60">
-          {kicker}
-        </p>
-      )}
-      <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
-        <span className="gradient-text">{title}</span>
-      </h2>
-    </div>
+    <motion.div ref={ref} style={{ y }} className="will-change-transform">
+      <img src={src} alt={alt} className={className} />
+    </motion.div>
   );
 }
+
+/**
+ * TechFooter animation variants
+ */
+const footerContainerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const fadeUpVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 20
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: TIMING.normal,
+      ease: EASING.smooth
+    }
+  }
+};
+
+const logoScaleVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.8
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      bounce: 0.3,
+      duration: TIMING.slow
+    }
+  }
+};
+
+const contactLinkVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -10
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: TIMING.normal,
+      ease: EASING.smooth
+    }
+  }
+};
 
 function TechFooter() {
   return (
     <footer id="tech-contact" className="border-t border-white/10 bg-black/60">
-      <div className="container py-12 md:py-16">
+      <motion.div
+        className="container py-12 md:py-16"
+        initial="hidden"
+        whileInView="visible"
+        viewport={defaultViewport}
+        variants={footerContainerVariants}
+      >
         <div className="flex flex-col items-center gap-6 text-center">
-          <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+          {/* Title */}
+          <motion.h3
+            className="text-2xl md:text-3xl font-extrabold tracking-tight"
+            variants={fadeUpVariants}
+          >
             CREATIVE TECH AGENCY
-          </h3>
-          <div className="grid gap-8 md:grid-cols-3 w-full max-w-3xl items-center">
-            <div className="order-2 md:order-1 text-sm text-white/70">
-              <div className="flex items-center justify-center gap-2">
+          </motion.h3>
+
+          {/* Contact grid */}
+          <motion.div
+            className="grid gap-8 md:grid-cols-3 w-full max-w-3xl items-center"
+            variants={fadeUpVariants}
+          >
+            {/* Email */}
+            <motion.div
+              className="order-2 md:order-1 text-sm text-white/70"
+              variants={contactLinkVariants}
+            >
+              <motion.div
+                className="flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: TIMING.fast }}
+              >
                 <span className="sr-only">Email</span>
                 <svg
                   viewBox="0 0 24 24"
@@ -38,14 +150,19 @@ function TechFooter() {
                   <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
                 </svg>
                 <a
-                  className="hover:underline"
+                  className="hover:underline hover:text-white transition-colors"
                   href="mailto:nucreoglobal@gmail.com"
                 >
                   nucreoglobal@gmail.com
                 </a>
-              </div>
-            </div>
-            <div className="order-1 md:order-2 flex items-center justify-center">
+              </motion.div>
+            </motion.div>
+
+            {/* Logo */}
+            <motion.div
+              className="order-1 md:order-2 flex items-center justify-center"
+              variants={logoScaleVariants}
+            >
               <div className="relative inline-flex items-center justify-center rounded-lg p-2">
                 <video
                   src="/logo.mov"
@@ -56,9 +173,18 @@ function TechFooter() {
                   className="h-29 w-29 rounded"
                 />
               </div>
-            </div>
-            <div className="order-3 text-sm text-white/70">
-              <div className="flex items-center justify-center gap-2">
+            </motion.div>
+
+            {/* Telegram */}
+            <motion.div
+              className="order-3 text-sm text-white/70"
+              variants={contactLinkVariants}
+            >
+              <motion.div
+                className="flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: TIMING.fast }}
+              >
                 <span className="sr-only">Telegram</span>
                 <svg
                   viewBox="0 0 24 24"
@@ -68,21 +194,23 @@ function TechFooter() {
                   <path d="M9.04 15.41l-.39 5.49c.56 0 .8-.24 1.09-.53l2.62-2.52 5.43 3.98c1 .55 1.72.26 1.99-.93l3.61-16.89h.01c.32-1.47-.53-2.05-1.5-1.69L1.5 9.6c-1.45.56-1.43 1.37-.25 1.73l5.49 1.71L18.88 6.5c.62-.41 1.18-.18.72.23" />
                 </svg>
                 <a
-                  className="hover:underline"
+                  className="hover:underline hover:text-white transition-colors"
                   href="https://t.me/nucreotech"
                   target="_blank"
                   rel="noreferrer"
                 >
                   @nucreotech
                 </a>
-              </div>
-            </div>
-          </div>
-          <p className="text-xs text-white/40">
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* Copyright */}
+          <motion.p className="text-xs text-white/40" variants={fadeUpVariants}>
             &copy; {new Date().getFullYear()} NUCREO TECH. All rights reserved.
-          </p>
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }
@@ -102,43 +230,73 @@ export default function TechIndex() {
 
           {/* Top Labels - between title and top of screen */}
           <div className="absolute top-[28%] left-[25%] -translate-x-1/2 z-20">
-            <BracketLabel variant="orange">web dev</BracketLabel>
+            <BracketLabel variant="orange" delay={0.6} floatDuration={3.5}>
+              web dev
+            </BracketLabel>
           </div>
           <div className="absolute top-[30%] left-[75%] -translate-x-1/2 z-20">
-            <BracketLabel variant="orange">ios dev</BracketLabel>
+            <BracketLabel variant="orange" delay={0.7} floatDuration={4}>
+              ios dev
+            </BracketLabel>
           </div>
 
           <div className="container relative z-10 pt-24 pb-16">
             {/* Hero Title Layout */}
-            <div className="relative mt-10 mb-10 flex flex-col items-center">
+            <motion.div
+              className="relative mt-10 mb-10 flex flex-col items-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+              variants={heroStaggerContainer}
+            >
               {/* Wrapper that matches title width */}
               <div className="inline-flex flex-col">
                 {/* Labels positioned relative to title */}
-                <div className="flex justify-between items-end mb-2 px-1">
+                <motion.div
+                  className="flex justify-between items-end mb-2 px-1"
+                  variants={heroStaggerItem}
+                >
                   <p className="text-white text-3xl md:text-6xl font-light whitespace-nowrap">
                     We're
                   </p>
                   <p className="text-sm md:text-base font-light bg-gradient-to-r from-[#FF5E00] to-[#AD0000] bg-clip-text text-transparent text-right whitespace-nowrap">
                     Creative design and tech agency
                   </p>
-                </div>
+                </motion.div>
                 {/* Title */}
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-center">
+                <AnimatedTextLine
+                  as="h1"
+                  className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] text-center"
+                  delay={0.3}
+                >
                   "NUCREO TECH"
-                </h1>
+                </AnimatedTextLine>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center justify-center gap-3 flex-wrap">
-              <a
+            {/* CTA Buttons */}
+            <motion.div
+              className="flex items-center justify-center gap-3 flex-wrap"
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+              variants={staggerContainer}
+            >
+              <motion.a
                 href="#tech-offer"
                 className="inline-flex items-center rounded-md bg-gradient-to-tr from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))] px-5 py-3 font-semibold text-white shadow-lg shadow-blue-500/20"
+                variants={staggerItem}
+                whileHover={primaryButtonHoverTech}
+                whileTap={buttonTap}
               >
                 Explore services
-              </a>
-              <button
+              </motion.a>
+              <motion.button
                 onClick={goToMain}
                 className="inline-flex items-center rounded-md border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white/90 hover:bg-white/10 transition-colors"
+                variants={staggerItem}
+                whileHover={buttonHover}
+                whileTap={buttonTap}
               >
                 <svg
                   className="w-4 h-4 mr-2"
@@ -154,25 +312,30 @@ export default function TechIndex() {
                   />
                 </svg>
                 Back to Nucreo
-              </button>
-              <a
+              </motion.button>
+              <motion.a
                 href="#tech-contact"
                 className="inline-flex items-center rounded-md border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white/90 hover:bg-white/10"
+                variants={staggerItem}
+                whileHover={buttonHover}
+                whileTap={buttonTap}
               >
                 Contact
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
           </div>
 
           {/* Bottom Labels - under title with good margin */}
           <div className="absolute top-[75%] left-[35%] -translate-x-1/2 z-20">
-            <BracketLabel variant="orange">typescript</BracketLabel>
+            <BracketLabel variant="orange" delay={0.8} floatDuration={3.2}>
+              typescript
+            </BracketLabel>
           </div>
           <div className="absolute top-[77%] ml-5 left-[65%] -translate-x-1/2 z-20">
-            <BracketLabel variant="orange">node.js</BracketLabel>
+            <BracketLabel variant="orange" delay={0.9} floatDuration={3.8}>
+              node.js
+            </BracketLabel>
           </div>
-
-
         </section>
 
         {/* Tech Expertise */}
@@ -181,29 +344,34 @@ export default function TechIndex() {
           className="glow-container glow-top-right py-20 md:py-28 scroll-mt-24"
         >
           <div className="container relative z-10">
-            <div className="mb-10">
+            <AnimatedSection direction="up" className="mb-10">
               <h2 className="text-4xl md:text-6xl tracking-tight mb-1">
                 <span className="font-normal">Our</span>{" "}
                 <span className="font-extrabold uppercase">EXPERTISE</span>
               </h2>
-            </div>
-            <div className="grid gap-6 md:grid-cols-3">
-              <img
-                src="/card1.png"
-                alt="Industry Tools and Partners"
-                className="w-full h-auto object-cover rounded-xl"
-              />
-              <img
-                src="/card2.png"
-                alt="Engineering Experience"
-                className="w-full h-auto object-cover rounded-xl"
-              />
-              <img
-                src="/card3.png"
-                alt="User Experience Focus"
-                className="w-full h-auto object-cover rounded-xl"
-              />
-            </div>
+            </AnimatedSection>
+            <motion.div
+              className="grid gap-6 md:grid-cols-3"
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+              variants={staggerContainer}
+            >
+              {[
+                { src: "/card1.png", alt: "Industry Tools and Partners" },
+                { src: "/card2.png", alt: "Engineering Experience" },
+                { src: "/card3.png", alt: "User Experience Focus" }
+              ].map((card) => (
+                <motion.img
+                  key={card.alt}
+                  src={card.src}
+                  alt={card.alt}
+                  className="w-full h-auto object-cover rounded-xl"
+                  variants={staggerItem}
+                  whileHover={{ y: -8, transition: { duration: TIMING.fast } }}
+                />
+              ))}
+            </motion.div>
           </div>
         </section>
 
@@ -213,7 +381,7 @@ export default function TechIndex() {
           className="glow-container glow-center py-20 md:py-28 scroll-mt-24"
         >
           <div className="container relative z-10">
-            <div className="flex justify-center mb-12">
+            <AnimatedSection direction="up" className="flex justify-center mb-12">
               <div className="inline-flex flex-col text-left">
                 <p className="text-3xl md:text-5xl text-white font-light">
                   What we
@@ -222,22 +390,31 @@ export default function TechIndex() {
                   &nbsp;&nbsp;&nbsp;OFFER
                 </h2>
               </div>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3 mt-16">
+            </AnimatedSection>
+            <motion.div
+              className="flex flex-wrap justify-center gap-3 mt-16"
+              initial="hidden"
+              whileInView="visible"
+              viewport={defaultViewport}
+              variants={staggerContainer}
+            >
               {[
                 { id: "tech-websites", name: "WEB SOLUTIONS" },
                 { id: "tech-ios", name: "IOS DEVELOPMENT" },
                 { id: "tech-custom", name: "CUSTOM & SPECIAL REQUESTS" },
               ].map((s) => (
-                <a
+                <motion.a
                   key={s.id}
                   href={`#${s.id}`}
                   className="inline-block px-8 py-3.5 text-base md:text-lg tracking-wide text-white rounded-full hover:bg-white/20 transition-all"
+                  variants={staggerItem}
+                  whileHover={buttonHover}
+                  whileTap={buttonTap}
                 >
                   {s.name}
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -247,14 +424,20 @@ export default function TechIndex() {
           className="glow-container glow-bottom-left py-16 md:py-24 scroll-mt-24"
         >
           <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-            <div>
+            <AnimatedSection direction="left">
               <h3 className="text-3xl md:text-5xl font-extrabold mb-8">
                 WEB SOLUTIONS
               </h3>
 
-              <div className="space-y-8">
+              <motion.div
+                className="space-y-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={defaultViewport}
+                variants={staggerContainer}
+              >
                 {/* Item 1 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -271,10 +454,10 @@ export default function TechIndex() {
                       high-conversion structure that drives profit
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 2 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -291,10 +474,10 @@ export default function TechIndex() {
                       specifically optimized to sell your product or service
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 3 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -311,10 +494,10 @@ export default function TechIndex() {
                       services for a unified & automated business flow
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 4 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -331,10 +514,10 @@ export default function TechIndex() {
                       admin panels, and high-end interactive elements
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 5 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -350,19 +533,19 @@ export default function TechIndex() {
                       WebView/PWA and App Store submission
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
+            </AnimatedSection>
 
-            <div>
+            <AnimatedSection direction="right" delay={0.2}>
               <div className="relative w-full overflow-hidden rounded-xl">
-                <img
+                <ParallaxImage
                   src="/mac1.png"
                   alt="Web Solutions - Modern web development showcase"
                   className="w-full h-auto object-cover"
                 />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -371,13 +554,19 @@ export default function TechIndex() {
           className="glow-container glow-top-right py-16 md:py-24 scroll-mt-24"
         >
           <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-            <div>
+            <AnimatedSection direction="left">
               <h3 className="text-3xl md:text-5xl font-extrabold mb-8">
                 IOS DEVELOPMENT
               </h3>
-              <div className="space-y-8">
+              <motion.div
+                className="space-y-8"
+                initial="hidden"
+                whileInView="visible"
+                viewport={defaultViewport}
+                variants={staggerContainer}
+              >
                 {/* Item 1 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -394,10 +583,10 @@ export default function TechIndex() {
                       framework
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 2 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -414,10 +603,10 @@ export default function TechIndex() {
                       Guidelines
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 3 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -434,10 +623,10 @@ export default function TechIndex() {
                       databases
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 4 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -453,10 +642,10 @@ export default function TechIndex() {
                       Advanced push notifications and native payment gateways
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Item 5 */}
-                <div className="flex gap-6 items-start">
+                <motion.div className="flex gap-6 items-start" variants={staggerItem}>
                   <div className="flex-shrink-0">
                     <div className="rounded-full p-[2px] bg-gradient-to-br from-[hsl(var(--brand-start))] to-[hsl(var(--brand-end))]">
                       <div className="flex h-[44px] w-[44px] items-center justify-center rounded-full bg-black">
@@ -472,18 +661,18 @@ export default function TechIndex() {
                       End-to-end submission management and moderation support
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div>
+                </motion.div>
+              </motion.div>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.2}>
               <div className="relative w-full overflow-hidden rounded-xl">
-                <img
+                <ParallaxImage
                   src="/phones.png"
                   alt="IOS DEVELOPMENT"
                   className="w-full h-auto object-cover"
                 />
               </div>
-            </div>
+            </AnimatedSection>
           </div>
         </section>
 
@@ -508,16 +697,28 @@ export default function TechIndex() {
           />
 
           <div className="container relative z-10">
-            <h3 className="text-3xl md:text-5xl mb-12 text-left">
-              <span className="font-bold">CUSTOM & SPECIAL</span>
-              <br />
-              <span className="font-light">REQUESTS</span>
-            </h3>
+            <AnimatedSection direction="up">
+              <h3 className="text-3xl md:text-5xl mb-12 text-left">
+                <span className="font-bold">CUSTOM & SPECIAL</span>
+                <br />
+                <span className="font-light">REQUESTS</span>
+              </h3>
+            </AnimatedSection>
 
             <div className="relative">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+              <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10"
+                initial="hidden"
+                whileInView="visible"
+                viewport={defaultViewport}
+                variants={staggerContainer}
+              >
                 {/* Card 1 */}
-                <div className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]">
+                <motion.div
+                  className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]"
+                  variants={staggerItem}
+                  whileHover={{ y: -8, transition: { duration: TIMING.fast } }}
+                >
                   <div className="rounded-xl bg-gradient-to-br from-[#191919] to-[#000000] p-6 flex gap-6 items-start h-full">
                     <div className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-[#FF5E00] to-[#AD0000] bg-clip-text text-transparent">
                       1
@@ -532,10 +733,14 @@ export default function TechIndex() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Card 2 */}
-                <div className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]">
+                <motion.div
+                  className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]"
+                  variants={staggerItem}
+                  whileHover={{ y: -8, transition: { duration: TIMING.fast } }}
+                >
                   <div className="rounded-xl bg-gradient-to-br from-[#191919] to-[#000000] p-6 flex gap-6 items-start h-full">
                     <div className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-[#FF5E00] to-[#AD0000] bg-clip-text text-transparent">
                       2
@@ -549,10 +754,14 @@ export default function TechIndex() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Card 3 */}
-                <div className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]">
+                <motion.div
+                  className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]"
+                  variants={staggerItem}
+                  whileHover={{ y: -8, transition: { duration: TIMING.fast } }}
+                >
                   <div className="rounded-xl bg-gradient-to-br from-[#191919] to-[#000000] p-6 flex gap-6 items-start h-full">
                     <div className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-[#FF5E00] to-[#AD0000] bg-clip-text text-transparent">
                       3
@@ -567,10 +776,14 @@ export default function TechIndex() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Card 4 */}
-                <div className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]">
+                <motion.div
+                  className="rounded-xl p-[1px] bg-gradient-to-br from-[#666666] to-[#000000]"
+                  variants={staggerItem}
+                  whileHover={{ y: -8, transition: { duration: TIMING.fast } }}
+                >
                   <div className="rounded-xl bg-gradient-to-br from-[#191919] to-[#000000] p-6 flex gap-6 items-start h-full">
                     <div className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-[#FF5E00] to-[#AD0000] bg-clip-text text-transparent">
                       4
@@ -585,49 +798,11 @@ export default function TechIndex() {
                       </p>
                     </div>
                   </div>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </section>
-
-        {/*/!* Tech Stack *!/*/}
-        {/*<section*/}
-        {/*  id="tech-stack"*/}
-        {/*  className="glow-container glow-center py-20 md:py-28 scroll-mt-24"*/}
-        {/*>*/}
-        {/*  <div className="container relative z-10">*/}
-        {/*    <div className="text-center max-w-4xl mx-auto">*/}
-        {/*      <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">*/}
-        {/*        Built with <span className="gradient-text">Modern Tech</span>*/}
-        {/*      </h2>*/}
-        {/*      <p className="text-lg md:text-xl text-white/80 leading-relaxed mb-12">*/}
-        {/*        We use cutting-edge technologies to build fast,*/}
-        {/*        <br />*/}
-        {/*        scalable, and maintainable web solutions.*/}
-        {/*      </p>*/}
-        {/*      <div className="flex flex-wrap justify-center gap-4">*/}
-        {/*        {[*/}
-        {/*          "React",*/}
-        {/*          "Vue",*/}
-        {/*          "TypeScript",*/}
-        {/*          "Next.js",*/}
-        {/*          "Tailwind CSS",*/}
-        {/*          "Node.js",*/}
-        {/*          "PostgreSQL",*/}
-        {/*          "Docker",*/}
-        {/*        ].map((tech) => (*/}
-        {/*          <span*/}
-        {/*            key={tech}*/}
-        {/*            className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/70"*/}
-        {/*          >*/}
-        {/*            {tech}*/}
-        {/*          </span>*/}
-        {/*        ))}*/}
-        {/*      </div>*/}
-        {/*    </div>*/}
-        {/*  </div>*/}
-        {/*</section>*/}
 
         {/* Workflow */}
         <section
@@ -638,169 +813,94 @@ export default function TechIndex() {
             <SectionTitle title="Development Process" />
             <div className="grid gap-x-12 gap-y-0 md:grid-cols-2">
               {/* Left Column */}
-              <div className="space-y-0">
-                {/* Discovery */}
-                <div className="flex gap-4 min-h-[140px]">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-[hsl(var(--brand-start))]">
-                        1
-                      </span>
-                    </div>
-                    <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Brief consultation
-                    </h4>
-                    <p className="mt-1 text-white/60">
+              <TimelineColumn>
+                <TimelineStepSimple
+                  number={1}
+                  title="Brief consultation"
+                  description={
+                    <>
                       Understanding your business, target audience, and
                       <br />
                       technical needs.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Planning */}
-                <div className="flex gap-4 min-h-[140px]">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-white">2</span>
-                    </div>
-                    <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Pre-payment
-                    </h4>
-                    <p className="mt-1 text-white/60">
+                    </>
+                  }
+                  minHeight="140px"
+                />
+                <TimelineStepSimple
+                  number={2}
+                  title="Pre-payment"
+                  description={
+                    <>
                       50% upfront for new clients. 100% upfront for <br />{" "}
                       returning clients.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Design */}
-                <div className="flex gap-4 min-h-[140px]">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-[hsl(var(--brand-start))]">
-                        3
-                      </span>
-                    </div>
-                    <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Design Mockups
-                    </h4>
-                    <p className="mt-1 text-white/60">
+                    </>
+                  }
+                  filled
+                  minHeight="140px"
+                />
+                <TimelineStepSimple
+                  number={3}
+                  title="Design Mockups"
+                  description={
+                    <>
                       Figma prototypes for desktop & mobile.
                       <br /> 2 revision rounds included.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Development */}
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-[hsl(var(--brand-start))]">
-                        4
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Development Sprint
-                    </h4>
-                    <p className="mt-1 text-white/60">
-                      Agile development with weekly demos and staging access.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                    </>
+                  }
+                  minHeight="140px"
+                />
+                <TimelineStepSimple
+                  number={4}
+                  title="Development Sprint"
+                  description="Agile development with weekly demos and staging access."
+                  isLast
+                />
+              </TimelineColumn>
 
               {/* Right Column */}
-              <div className="space-y-0">
-                {/* Testing */}
-                <div className="flex gap-4 min-h-[140px]">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-[hsl(var(--brand-start))]">
-                        5
-                      </span>
-                    </div>
-                    <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Approval and revisions
-                    </h4>
-                    <p className="mt-1 text-white/60">
+              <TimelineColumn>
+                <TimelineStepSimple
+                  number={5}
+                  title="Approval and revisions"
+                  description={
+                    <>
                       Adjustments to ensure the final result
                       <br /> meets your expectations
-                    </p>
-                  </div>
-                </div>
-
-                {/* Review */}
-                <div className="flex gap-4 min-h-[140px]">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-[hsl(var(--brand-start))]">
-                        6
-                      </span>
-                    </div>
-                    <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Launch & Deployment
-                    </h4>
-                    <p className="mt-1 text-white/60">
+                    </>
+                  }
+                  minHeight="140px"
+                />
+                <TimelineStepSimple
+                  number={6}
+                  title="Launch & Deployment"
+                  description={
+                    <>
                       Full technical setup: hosting, SSL, analytics, <br />
                       App Store submission.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Launch */}
-                <div className="flex gap-4 min-h-[140px]">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-white">7</span>
-                    </div>
-                    <div className="w-px flex-1 border-l-2 border-dashed border-white/20 mt-2"></div>
-                  </div>
-                  <div className="flex-1 pt-1 pb-8">
-                    <h4 className="text-xl font-bold text-white">
-                      Final Payment
-                    </h4>
-                    <p className="mt-1 text-white/60">
+                    </>
+                  }
+                  minHeight="140px"
+                />
+                <TimelineStepSimple
+                  number={7}
+                  title="Final Payment"
+                  description={
+                    <>
                       50% — remaining balance upon project completion
                       <br /> (for new clients only).
-                    </p>
-                  </div>
-                </div>
-
-                {/* Support */}
-                <div className="flex gap-4">
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[hsl(var(--brand-start))]">
-                      <span className="text-sm font-bold text-white">8</span>
-                    </div>
-                  </div>
-                  <div className="flex-1 pt-1">
-                    <h4 className="text-xl font-bold text-white">
-                      Paid Revisions
-                    </h4>
-                    <p className="mt-1 text-white/60">
-                      Extra revisions billed separately.
-                    </p>
-                  </div>
-                </div>
-              </div>
+                    </>
+                  }
+                  filled
+                  minHeight="140px"
+                />
+                <TimelineStepSimple
+                  number={8}
+                  title="Paid Revisions"
+                  description="Extra revisions billed separately."
+                  filled
+                  isLast
+                />
+              </TimelineColumn>
             </div>
           </div>
         </section>
