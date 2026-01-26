@@ -229,12 +229,12 @@ export default function TechIndex() {
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/30 to-black" />
 
           {/* Top Labels - between title and top of screen */}
-          <div className="absolute top-[28%] left-[25%] -translate-x-1/2 z-20">
+          <div className="absolute top-[20%] left-[25%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange" delay={0.6} floatDuration={3.5}>
               web dev
             </BracketLabel>
           </div>
-          <div className="absolute top-[30%] left-[75%] -translate-x-1/2 z-20">
+          <div className="absolute top-[22%] left-[75%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange" delay={0.7} floatDuration={4}>
               ios dev
             </BracketLabel>
@@ -326,12 +326,12 @@ export default function TechIndex() {
           </div>
 
           {/* Bottom Labels - under title with good margin */}
-          <div className="absolute top-[75%] left-[35%] -translate-x-1/2 z-20">
+          <div className="absolute top-[84%] left-[33%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange" delay={0.8} floatDuration={3.2}>
               typescript
             </BracketLabel>
           </div>
-          <div className="absolute top-[77%] ml-5 left-[65%] -translate-x-1/2 z-20">
+          <div className="absolute top-[86%] ml-7 left-[65%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange" delay={0.9} floatDuration={3.8}>
               node.js
             </BracketLabel>

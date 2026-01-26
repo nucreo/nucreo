@@ -75,12 +75,12 @@ export default function Index() {
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-black/30 to-black" />
 
         {/* Top Labels - between title and top of screen */}
-        <div className="absolute top-[28%] left-[25%] -translate-x-1/2 z-20">
+        <div className="absolute top-[24%] left-[25%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.6} floatDuration={3.5}>
             gambling
           </BracketLabel>
         </div>
-        <div className="absolute top-[30%] left-[75%] -translate-x-1/2 z-20">
+        <div className="absolute top-[26%] left-[75%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.7} floatDuration={4}>
             betting
           </BracketLabel>
@@ -172,12 +172,12 @@ export default function Index() {
         </div>
 
         {/* Bottom Labels - under title with good margin */}
-        <div className="absolute top-[74%] left-[35%] -translate-x-1/2 z-20">
+        <div className="absolute top-[80%] left-[35%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.8} floatDuration={3.2}>
             crypto
           </BracketLabel>
         </div>
-        <div className="absolute top-[76%] ml-2 left-[65%] -translate-x-1/2 z-20">
+        <div className="absolute top-[82%] ml-2 left-[65%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.9} floatDuration={3.8}>
             dating
           </BracketLabel>
