@@ -1,6 +1,6 @@
 # fly.toml app configuration file generated for nucreo on 2026-01-26T12:58:18Z
 #
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.#
 #
 
 app = 'nucreo'

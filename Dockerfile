@@ -21,7 +21,7 @@ RUN pnpm run build:client
 # Production stage - Nginx
 FROM nginx:alpine
 
-# Copy nginx configuration
+# Copy nginx configuration@
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy built static files from builder
