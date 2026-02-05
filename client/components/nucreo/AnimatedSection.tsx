@@ -1,15 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import {
-  fadeUp,
-  slideFromLeft,
-  slideFromRight,
-  fadeIn,
-  defaultViewport,
-  TIMING,
-  EASING
-} from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 interface AnimatedSectionProps {
   children: ReactNode;
@@ -23,11 +15,14 @@ interface AnimatedSectionProps {
 /**
  * Get the appropriate animation variants based on direction
  */
-function getVariants(direction: AnimatedSectionProps["direction"], delay: number): Variants {
+function getVariants(
+  direction: AnimatedSectionProps["direction"],
+  delay: number,
+): Variants {
   const baseTransition = {
     duration: TIMING.normal,
     ease: EASING.smooth,
-    delay
+    delay,
   };
 
   switch (direction) {
@@ -37,8 +32,8 @@ function getVariants(direction: AnimatedSectionProps["direction"], delay: number
         visible: {
           opacity: 1,
           x: 0,
-          transition: baseTransition
-        }
+          transition: baseTransition,
+        },
       };
     case "right":
       return {
@@ -46,16 +41,16 @@ function getVariants(direction: AnimatedSectionProps["direction"], delay: number
         visible: {
           opacity: 1,
           x: 0,
-          transition: baseTransition
-        }
+          transition: baseTransition,
+        },
       };
     case "none":
       return {
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
-          transition: baseTransition
-        }
+          transition: baseTransition,
+        },
       };
     case "up":
     default:
@@ -64,8 +59,8 @@ function getVariants(direction: AnimatedSectionProps["direction"], delay: number
         visible: {
           opacity: 1,
           y: 0,
-          transition: baseTransition
-        }
+          transition: baseTransition,
+        },
       };
   }
 }
@@ -79,6 +74,7 @@ function getVariants(direction: AnimatedSectionProps["direction"], delay: number
  * @param className - Additional CSS classes
  * @param as - HTML element type to render
  *
+ * @param id
  * @example
  * <AnimatedSection direction="up">
  *   <h2>Section Title</h2>
@@ -96,7 +92,7 @@ export function AnimatedSection({
   delay = 0,
   className,
   as = "div",
-  id
+  id,
 }: AnimatedSectionProps) {
   const MotionComponent = motion[as];
   const variants = getVariants(direction, delay);

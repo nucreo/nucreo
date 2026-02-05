@@ -1,6 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { TIMING, EASING, defaultViewport } from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 interface AnimatedTextProps {
   text: string;
@@ -19,9 +19,9 @@ const containerVariants: Variants = {
   visible: (custom: { staggerDelay: number; delay: number }) => ({
     transition: {
       staggerChildren: custom.staggerDelay,
-      delayChildren: custom.delay
-    }
-  })
+      delayChildren: custom.delay,
+    },
+  }),
 };
 
 /**
@@ -30,16 +30,16 @@ const containerVariants: Variants = {
 const wordVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 20
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: TIMING.normal,
-      ease: EASING.smooth
-    }
-  }
+      ease: EASING.smooth,
+    },
+  },
 };
 
 /**
@@ -77,7 +77,7 @@ export function AnimatedText({
   className,
   delay = 0,
   staggerDelay = 0.08,
-  wordClassName
+  wordClassName,
 }: AnimatedTextProps) {
   // Split text into words, preserving spacing
   const words = text.split(" ");
@@ -123,7 +123,7 @@ interface AnimatedTextLineProps {
 const lineVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 30
+    y: 30,
   },
   visible: (delay: number) => ({
     opacity: 1,
@@ -131,16 +131,16 @@ const lineVariants: Variants = {
     transition: {
       duration: TIMING.slow,
       ease: EASING.smooth,
-      delay
-    }
-  })
+      delay,
+    },
+  }),
 };
 
 export function AnimatedTextLine({
   children,
   as = "div",
   className,
-  delay = 0
+  delay = 0,
 }: AnimatedTextLineProps) {
   const MotionTag = motion[as];
 

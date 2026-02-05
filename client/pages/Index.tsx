@@ -11,16 +11,16 @@ import { AnimatedTextLine } from "@/components/nucreo/AnimatedText";
 import { AnimatedList } from "@/components/nucreo/AnimatedList";
 import { TimelineColumn, TimelineStepSimple } from "@/components/nucreo/TimelineStep";
 import {
-  heroStaggerContainer,
-  heroStaggerItem,
-  staggerContainer,
-  staggerItem,
-  defaultViewport,
   buttonHover,
   buttonTap,
+  defaultViewport,
+  heroStaggerContainer,
+  heroStaggerItem,
+  parallaxConfig,
   primaryButtonHover,
-  TIMING,
-  parallaxConfig
+  staggerContainer,
+  staggerItem,
+  TIMING
 } from "@/lib/animations";
 
 /**
@@ -80,7 +80,7 @@ export default function Index() {
             gambling
           </BracketLabel>
         </div>
-        <div className="absolute top-[26%] left-[75%] -translate-x-1/2 z-20">
+        <div className="absolute top-[24%] left-[75%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.7} floatDuration={4}>
             betting
           </BracketLabel>
@@ -172,7 +172,7 @@ export default function Index() {
         </div>
 
         {/* Bottom Labels - under title with good margin */}
-        <div className="absolute top-[80%] left-[35%] -translate-x-1/2 z-20">
+        <div className="absolute top-[82%] left-[35%] -translate-x-1/2 z-20">
           <BracketLabel variant="orange" delay={0.8} floatDuration={3.2}>
             crypto
           </BracketLabel>
@@ -237,23 +237,25 @@ export default function Index() {
             </div>
           </AnimatedSection>
           <motion.div
-            className="flex flex-wrap justify-center gap-3 mt-16"
+            className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3 mt-16"
             initial="hidden"
             whileInView="visible"
             viewport={defaultViewport}
             variants={staggerContainer}
           >
             {[
-              { id: "deepfakes", name: "DEEPFAKES" },
-              { id: "gameplays", name: "GAMEPLAYS" },
-              { id: "actors", name: "ACTORS" },
-              { id: "ai-videos", name: "AI VIDEOS" },
-              { id: "smm", name: "SMM PROJECT MANAGEMENT" },
+              { id: "deepfakes", name: "DEEPFAKES", mobileSpan: false },
+              { id: "gameplays", name: "GAMEPLAYS", mobileSpan: false },
+              { id: "actors", name: "ACTORS", mobileSpan: false },
+              { id: "ai-videos", name: "AI VIDEOS", mobileSpan: false },
+              { id: "smm", name: "SMM PROJECT MANAGEMENT", mobileSpan: true },
             ].map((s) => (
               <motion.a
                 key={s.id}
                 href={`#${s.id}`}
-                className="inline-block px-8 py-3.5 text-base md:text-lg tracking-wide text-white rounded-full hover:bg-white/20 transition-all"
+                className={`inline-flex justify-center px-4 md:px-8 py-3.5 text-sm md:text-lg tracking-wide text-white rounded-full hover:bg-white/20 transition-all ${
+                  s.mobileSpan ? "col-span-2" : ""
+                }`}
                 variants={staggerItem}
                 whileHover={buttonHover}
                 whileTap={buttonTap}
@@ -308,7 +310,7 @@ export default function Index() {
       </section>
 
       <section
-        className="glow-container glow-bottom-left py-16 md:py-24"
+        className="py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <AnimatedSection direction="left" id="gameplays" className="">
@@ -342,7 +344,7 @@ export default function Index() {
       </section>
 
       <section
-        className="glow-container py-16 md:py-24"
+        className="py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <AnimatedSection direction="left" id="actors" className="">
@@ -380,7 +382,7 @@ export default function Index() {
 
       <section className="py-16 md:py-24">
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
-          <AnimatedSection direction="left" id="ai-videos" className="glow-container glow-bottom-left ">
+          <AnimatedSection direction="left" id="ai-videos">
             <p className="text-sm uppercase tracking-[0.2em] text-white/60">
               Service
             </p>
@@ -407,7 +409,7 @@ export default function Index() {
       </section>
 
       <section
-        className="glow-container glow-bottom-left py-16 md:py-24"
+        className="py-16 md:py-24"
       >
         <div className="container relative z-10 grid gap-10 md:grid-cols-2 items-center">
           <AnimatedSection direction="left" id="smm" className="">
@@ -447,18 +449,16 @@ export default function Index() {
       {/* Partnership Model */}
       <section
         id="partnership"
-        className="glow-container glow-center py-20 md:py-28 "
+        className="glow-container glow-bottom-left py-20 md:py-28 "
       >
         <div className="container relative z-10">
           <AnimatedSection direction="up" className="text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
               Partner with <span className="gradient-text">NUCREO</span>
             </h2>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed">
               for one-off projects as your trusted outsource team,
-              <br />
               or integrate us fully as your in-house creative
-              <br />
               unit under NDA.
             </p>
           </AnimatedSection>

@@ -9,17 +9,17 @@ import { AnimatedSection } from "@/components/nucreo/AnimatedSection";
 import { AnimatedTextLine } from "@/components/nucreo/AnimatedText";
 import { TimelineColumn, TimelineStepSimple } from "@/components/nucreo/TimelineStep";
 import {
-  heroStaggerContainer,
-  heroStaggerItem,
-  staggerContainer,
-  staggerItem,
-  defaultViewport,
   buttonHover,
   buttonTap,
-  primaryButtonHoverTech,
-  TIMING,
+  defaultViewport,
   EASING,
-  parallaxConfig
+  heroStaggerContainer,
+  heroStaggerItem,
+  parallaxConfig,
+  primaryButtonHoverTech,
+  staggerContainer,
+  staggerItem,
+  TIMING
 } from "@/lib/animations";
 
 /**
@@ -234,7 +234,7 @@ export default function TechIndex() {
               web dev
             </BracketLabel>
           </div>
-          <div className="absolute top-[22%] left-[75%] -translate-x-1/2 z-20">
+          <div className="absolute top-[20%] left-[75%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange" delay={0.7} floatDuration={4}>
               ios dev
             </BracketLabel>
@@ -326,7 +326,7 @@ export default function TechIndex() {
           </div>
 
           {/* Bottom Labels - under title with good margin */}
-          <div className="absolute top-[84%] left-[33%] -translate-x-1/2 z-20">
+          <div className="absolute top-[86%] left-[33%] -translate-x-1/2 z-20">
             <BracketLabel variant="orange" delay={0.8} floatDuration={3.2}>
               typescript
             </BracketLabel>
@@ -344,7 +344,7 @@ export default function TechIndex() {
           className="glow-container glow-top-right py-20 md:py-28 scroll-mt-24"
         >
           <div className="container relative z-10">
-            <AnimatedSection direction="up" className="mb-10">
+            <AnimatedSection direction="up" className="mb-5">
               <h2 className="text-4xl md:text-6xl tracking-tight mb-1">
                 <span className="font-normal">Our</span>{" "}
                 <span className="font-extrabold uppercase">EXPERTISE</span>
@@ -392,21 +392,23 @@ export default function TechIndex() {
               </div>
             </AnimatedSection>
             <motion.div
-              className="flex flex-wrap justify-center gap-3 mt-16"
+              className="grid grid-cols-2 md:flex md:flex-wrap justify-center gap-3 mt-16"
               initial="hidden"
               whileInView="visible"
               viewport={defaultViewport}
               variants={staggerContainer}
             >
               {[
-                { id: "tech-websites", name: "WEB SOLUTIONS" },
-                { id: "tech-ios", name: "IOS DEVELOPMENT" },
-                { id: "tech-custom", name: "CUSTOM & SPECIAL REQUESTS" },
+                { id: "tech-websites", name: "WEB SOLUTIONS", mobileSpan: false },
+                { id: "tech-ios", name: "IOS DEVELOPMENT", mobileSpan: false },
+                { id: "tech-custom", name: "CUSTOM & SPECIAL REQUESTS", mobileSpan: true },
               ].map((s) => (
                 <motion.a
                   key={s.id}
                   href={`#${s.id}`}
-                  className="inline-block px-8 py-3.5 text-base md:text-lg tracking-wide text-white rounded-full hover:bg-white/20 transition-all"
+                  className={`inline-flex justify-center px-4 md:px-8 py-3.5 text-sm md:text-lg tracking-wide text-white rounded-full hover:bg-white/20 transition-all ${
+                    s.mobileSpan ? "col-span-2" : ""
+                  }`}
                   variants={staggerItem}
                   whileHover={buttonHover}
                   whileTap={buttonTap}

@@ -1,6 +1,6 @@
 import { motion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { kickerReveal, titleReveal, defaultViewport, TIMING, EASING } from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 interface SectionTitleProps {
   /** Optional kicker/label text above the title */
@@ -27,9 +27,9 @@ const containerVariants: Variants = {
   visible: (delay: number) => ({
     transition: {
       staggerChildren: 0.1,
-      delayChildren: delay
-    }
-  })
+      delayChildren: delay,
+    },
+  }),
 };
 
 /**
@@ -38,16 +38,16 @@ const containerVariants: Variants = {
 const kickerVariants: Variants = {
   hidden: {
     opacity: 0,
-    x: -20
+    x: -20,
   },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
       duration: TIMING.normal,
-      ease: EASING.smooth
-    }
-  }
+      ease: EASING.smooth,
+    },
+  },
 };
 
 /**
@@ -57,7 +57,7 @@ const titleVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 20,
-    scale: 0.95
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
@@ -65,9 +65,9 @@ const titleVariants: Variants = {
     scale: 1,
     transition: {
       duration: TIMING.normal,
-      ease: EASING.smooth
-    }
-  }
+      ease: EASING.smooth,
+    },
+  },
 };
 
 /**
@@ -107,11 +107,11 @@ export function SectionTitle({
   kickerClassName,
   titleClassName,
   gradient = true,
-  delay = 0
+  delay = 0,
 }: SectionTitleProps) {
   return (
     <motion.div
-      className={cn("mb-10", className)}
+      className={cn("mb-5", className)}
       initial="hidden"
       whileInView="visible"
       viewport={defaultViewport}
@@ -122,7 +122,7 @@ export function SectionTitle({
         <motion.p
           className={cn(
             "text-sm uppercase tracking-[0.2em] text-white/60",
-            kickerClassName
+            kickerClassName,
           )}
           variants={kickerVariants}
         >
@@ -132,15 +132,11 @@ export function SectionTitle({
       <motion.h2
         className={cn(
           "text-3xl md:text-5xl font-extrabold tracking-tight",
-          titleClassName
+          titleClassName,
         )}
         variants={titleVariants}
       >
-        {gradient ? (
-          <span className="gradient-text">{title}</span>
-        ) : (
-          title
-        )}
+        {gradient ? <span className="gradient-text">{title}</span> : title}
       </motion.h2>
     </motion.div>
   );

@@ -1,6 +1,5 @@
 import { motion, Variants } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { TIMING, EASING, defaultViewport } from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 /**
  * Container variants for staggered footer animation

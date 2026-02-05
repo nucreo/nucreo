@@ -1,7 +1,7 @@
 import { motion, Variants } from "framer-motion";
-import { ReactNode, Children, isValidElement, cloneElement, ReactElement } from "react";
+import { Children, isValidElement, ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { TIMING, EASING, defaultViewport } from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 interface AnimatedListProps {
   children: ReactNode;
@@ -19,9 +19,9 @@ const listContainerVariants: Variants = {
   visible: (staggerDelay: number) => ({
     transition: {
       staggerChildren: staggerDelay,
-      delayChildren: 0.1
-    }
-  })
+      delayChildren: 0.1,
+    },
+  }),
 };
 
 /**
@@ -30,16 +30,16 @@ const listContainerVariants: Variants = {
 const listItemVariants: Variants = {
   hidden: {
     opacity: 0,
-    x: -15
+    x: -15,
   },
   visible: {
     opacity: 1,
     x: 0,
     transition: {
       duration: TIMING.normal,
-      ease: EASING.smooth
-    }
-  }
+      ease: EASING.smooth,
+    },
+  },
 };
 
 /**
@@ -72,7 +72,7 @@ export function AnimatedList({
   staggerDelay = 0.05,
   as = "ul",
   className,
-  itemClassName
+  itemClassName,
 }: AnimatedListProps) {
   const MotionList = as === "ol" ? motion.ol : motion.ul;
 
@@ -124,7 +124,10 @@ interface AnimatedListItemProps {
   className?: string;
 }
 
-export function AnimatedListItem({ children, className }: AnimatedListItemProps) {
+export function AnimatedListItem({
+  children,
+  className,
+}: AnimatedListItemProps) {
   return (
     <motion.li className={cn(className)} variants={listItemVariants}>
       {children}

@@ -1,7 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { TIMING, EASING, defaultViewport } from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 type HoverEffect = "lift" | "glow" | "scale" | "none";
 
@@ -20,7 +20,7 @@ const cardVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 40,
-    scale: 0.95
+    scale: 0.95,
   },
   visible: (index: number) => ({
     opacity: 1,
@@ -29,9 +29,9 @@ const cardVariants: Variants = {
     transition: {
       duration: TIMING.normal,
       ease: EASING.smooth,
-      delay: index * 0.1
-    }
-  })
+      delay: index * 0.1,
+    },
+  }),
 };
 
 /**
@@ -42,17 +42,17 @@ function getHoverAnimation(effect: HoverEffect) {
     case "lift":
       return {
         y: -8,
-        transition: { duration: TIMING.fast }
+        transition: { duration: TIMING.fast },
       };
     case "glow":
       return {
         boxShadow: "0 10px 40px rgba(255, 94, 0, 0.25)",
-        transition: { duration: TIMING.fast }
+        transition: { duration: TIMING.fast },
       };
     case "scale":
       return {
         scale: 1.03,
-        transition: { duration: TIMING.fast }
+        transition: { duration: TIMING.fast },
       };
     case "none":
     default:
@@ -66,7 +66,7 @@ function getHoverAnimation(effect: HoverEffect) {
 function getTapAnimation(effect: HoverEffect) {
   if (effect === "none") return {};
   return {
-    scale: 0.98
+    scale: 0.98,
   };
 }
 
@@ -102,7 +102,7 @@ export function AnimatedCard({
   hoverEffect = "lift",
   index = 0,
   className,
-  as = "div"
+  as = "div",
 }: AnimatedCardProps) {
   const MotionComponent = motion[as];
   const hoverAnimation = getHoverAnimation(hoverEffect);
@@ -141,16 +141,16 @@ const containerVariants: Variants = {
   visible: (staggerDelay: number) => ({
     transition: {
       staggerChildren: staggerDelay,
-      delayChildren: 0.1
-    }
-  })
+      delayChildren: 0.1,
+    },
+  }),
 };
 
 const containerChildVariants: Variants = {
   hidden: {
     opacity: 0,
     y: 40,
-    scale: 0.95
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
@@ -158,15 +158,15 @@ const containerChildVariants: Variants = {
     scale: 1,
     transition: {
       duration: TIMING.normal,
-      ease: EASING.smooth
-    }
-  }
+      ease: EASING.smooth,
+    },
+  },
 };
 
 export function AnimatedCardContainer({
   children,
   className,
-  staggerDelay = 0.1
+  staggerDelay = 0.1,
 }: AnimatedCardContainerProps) {
   return (
     <motion.div
@@ -197,7 +197,7 @@ interface AnimatedCardItemProps {
 export function AnimatedCardItem({
   children,
   hoverEffect = "lift",
-  className
+  className,
 }: AnimatedCardItemProps) {
   const hoverAnimation = getHoverAnimation(hoverEffect);
   const tapAnimation = getTapAnimation(hoverEffect);

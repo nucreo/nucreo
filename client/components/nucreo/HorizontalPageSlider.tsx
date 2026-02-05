@@ -15,7 +15,7 @@ export function HorizontalPageSlider({ children }: HorizontalPageSliderProps) {
   // Measure page heights after mount and on resize
   useEffect(() => {
     const measureHeights = () => {
-      const heights = pageRefs.current.map(ref => {
+      const heights = pageRefs.current.map((ref) => {
         if (ref) {
           // Get the actual content height of each page
           // Use getBoundingClientRect for more accurate measurement
@@ -31,7 +31,7 @@ export function HorizontalPageSlider({ children }: HorizontalPageSliderProps) {
     measureHeights();
 
     // Re-measure on window resize
-    window.addEventListener('resize', measureHeights);
+    window.addEventListener("resize", measureHeights);
 
     // Re-measure multiple times to catch content loading
     const timer1 = setTimeout(measureHeights, 100);
@@ -39,7 +39,7 @@ export function HorizontalPageSlider({ children }: HorizontalPageSliderProps) {
     const timer3 = setTimeout(measureHeights, 1000);
 
     return () => {
-      window.removeEventListener('resize', measureHeights);
+      window.removeEventListener("resize", measureHeights);
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
@@ -57,31 +57,28 @@ export function HorizontalPageSlider({ children }: HorizontalPageSliderProps) {
     if (currentHeight && currentHeight > 0) {
       // Set body height to constrain scrolling
       document.body.style.height = `${currentHeight}px`;
-      document.body.style.overflow = 'auto';
-      document.body.style.overflowX = 'hidden';
+      document.body.style.overflow = "auto";
+      document.body.style.overflowX = "hidden";
 
       // Set html height but allow scrolling
       document.documentElement.style.height = `${currentHeight}px`;
-      document.documentElement.style.overflow = 'auto';
-      document.documentElement.style.overflowX = 'hidden';
+      document.documentElement.style.overflow = "auto";
+      document.documentElement.style.overflowX = "hidden";
     }
 
     return () => {
-      document.body.style.height = '';
-      document.body.style.overflow = '';
-      document.body.style.overflowX = '';
+      document.body.style.height = "";
+      document.body.style.overflow = "";
+      document.body.style.overflowX = "";
 
-      document.documentElement.style.height = '';
-      document.documentElement.style.overflow = '';
-      document.documentElement.style.overflowX = '';
+      document.documentElement.style.height = "";
+      document.documentElement.style.overflow = "";
+      document.documentElement.style.overflowX = "";
     };
   }, [currentPage, pageHeights]);
 
   return (
-    <div
-      className="page-slider-viewport"
-      ref={containerRef}
-    >
+    <div className="page-slider-viewport" ref={containerRef}>
       <motion.div
         className="page-slider-track"
         animate={{
@@ -96,8 +93,8 @@ export function HorizontalPageSlider({ children }: HorizontalPageSliderProps) {
         {children.map((child, index) => (
           <div
             key={index}
-            className={`page-slider-page ${index !== currentPage ? 'page-inactive' : ''}`}
-            ref={el => pageRefs.current[index] = el}
+            className={`page-slider-page ${index !== currentPage ? "page-inactive" : ""}`}
+            ref={(el) => (pageRefs.current[index] = el)}
           >
             {child}
           </div>

@@ -1,7 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { TIMING, EASING, defaultViewport } from "@/lib/animations";
+import { defaultViewport, EASING, TIMING } from "@/lib/animations";
 
 interface TimelineStepProps {
   number: number;
@@ -19,7 +19,7 @@ interface TimelineStepProps {
 const numberPopVariants: Variants = {
   hidden: {
     scale: 0,
-    opacity: 0
+    opacity: 0,
   },
   visible: {
     scale: 1,
@@ -27,9 +27,9 @@ const numberPopVariants: Variants = {
     transition: {
       type: "spring",
       bounce: 0.4,
-      duration: TIMING.slow
-    }
-  }
+      duration: TIMING.slow,
+    },
+  },
 };
 
 /**
@@ -38,7 +38,7 @@ const numberPopVariants: Variants = {
 const textContentVariants: Variants = {
   hidden: {
     opacity: 0,
-    x: 15
+    x: 15,
   },
   visible: {
     opacity: 1,
@@ -46,9 +46,9 @@ const textContentVariants: Variants = {
     transition: {
       duration: TIMING.normal,
       ease: EASING.smooth,
-      delay: 0.15
-    }
-  }
+      delay: 0.15,
+    },
+  },
 };
 
 /**
@@ -57,7 +57,7 @@ const textContentVariants: Variants = {
 const lineDrawVariants: Variants = {
   hidden: {
     scaleY: 0,
-    opacity: 0
+    opacity: 0,
   },
   visible: {
     scaleY: 1,
@@ -65,9 +65,9 @@ const lineDrawVariants: Variants = {
     transition: {
       duration: TIMING.normal,
       ease: EASING.smooth,
-      delay: 0.25
-    }
-  }
+      delay: 0.25,
+    },
+  },
 };
 
 /**
@@ -77,9 +77,9 @@ const stepContainerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.05
-    }
-  }
+      staggerChildren: 0.05,
+    },
+  },
 };
 
 /**
@@ -121,7 +121,7 @@ export function TimelineStep({
   filled = false,
   index,
   isLast = false,
-  className
+  className,
 }: TimelineStepProps) {
   return (
     <motion.div
@@ -138,14 +138,14 @@ export function TimelineStep({
             "flex h-10 w-10 items-center justify-center rounded-full",
             filled
               ? "bg-[hsl(var(--brand-start))]"
-              : "border-2 border-[hsl(var(--brand-start))]"
+              : "border-2 border-[hsl(var(--brand-start))]",
           )}
           variants={numberPopVariants}
         >
           <span
             className={cn(
               "text-sm font-bold",
-              filled ? "text-white" : "text-[hsl(var(--brand-start))]"
+              filled ? "text-white" : "text-[hsl(var(--brand-start))]",
             )}
           >
             {number}
@@ -187,15 +187,15 @@ const columnContainerVariants: Variants = {
   visible: (staggerDelay: number) => ({
     transition: {
       staggerChildren: staggerDelay,
-      delayChildren: 0.1
-    }
-  })
+      delayChildren: 0.1,
+    },
+  }),
 };
 
 export function TimelineColumn({
   children,
   className,
-  staggerDelay = 0.15
+  staggerDelay = 0.15,
 }: TimelineColumnProps) {
   return (
     <motion.div
@@ -230,16 +230,16 @@ interface TimelineStepSimpleProps {
 const simpleStepVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 20
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: TIMING.normal,
-      ease: EASING.smooth
-    }
-  }
+      ease: EASING.smooth,
+    },
+  },
 };
 
 export function TimelineStepSimple({
@@ -249,7 +249,7 @@ export function TimelineStepSimple({
   filled = false,
   isLast = false,
   className,
-  minHeight
+  minHeight,
 }: TimelineStepSimpleProps) {
   return (
     <motion.div
@@ -264,13 +264,13 @@ export function TimelineStepSimple({
             "flex h-10 w-10 items-center justify-center rounded-full",
             filled
               ? "bg-[hsl(var(--brand-start))]"
-              : "border-2 border-[hsl(var(--brand-start))]"
+              : "border-2 border-[hsl(var(--brand-start))]",
           )}
         >
           <span
             className={cn(
               "text-sm font-bold",
-              filled ? "text-white" : "text-[hsl(var(--brand-start))]"
+              filled ? "text-white" : "text-[hsl(var(--brand-start))]",
             )}
           >
             {number}
