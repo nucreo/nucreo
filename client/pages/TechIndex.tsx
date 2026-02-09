@@ -151,9 +151,9 @@ function TechFooter() {
                 </svg>
                 <a
                   className="hover:underline hover:text-white transition-colors"
-                  href="mailto:nucreoglobal@gmail.com"
+                  href="mailto:info@nucreo.art"
                 >
-                  nucreoglobal@gmail.com
+                  info@nucreo.art
                 </a>
               </motion.div>
             </motion.div>
